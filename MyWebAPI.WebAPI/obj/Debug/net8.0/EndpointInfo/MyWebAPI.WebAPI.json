@@ -1,0 +1,980 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MyWebAPI.WebAPI",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/BasData/GetAllMaterials": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "ModifyDTM",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialById": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetPagedMaterials": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "searchKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "yearNo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "seasonId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "proAllowUsed",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialsByCode": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialsByName": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData": {
+      "post": {
+        "tags": [
+          "BasData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BasData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Material"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/DeleteMaterial": {
+      "delete": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialsCountAsync": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetTest": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetUserByIdAsync": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetAllUsersAsync": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Material": {
+        "required": [
+          "checkState",
+          "isHorizontal",
+          "lan",
+          "materialCode",
+          "modifyDTM",
+          "proAllowUsed",
+          "yearNo"
+        ],
+        "type": "object",
+        "properties": {
+          "materialID": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "vendorMaterialCode": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "materialCode": {
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string"
+          },
+          "barCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "materialName": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "materialShortName": {
+            "maxLength": 120,
+            "type": "string",
+            "nullable": true
+          },
+          "foreignName": {
+            "type": "string",
+            "nullable": true
+          },
+          "matTypeID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "cardID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "kindID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "seriesID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "modelID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "itemID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "accreditID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "stuffID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "colorID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "colorName2": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "sexID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "unitID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "sizeTypeID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "yearNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seasonID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "newOld": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pictureCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "invSpec": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "styleCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "season1": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season2": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season3": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season4": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season5": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "proRetailPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "proSaleDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "subSeries": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "subModel": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "subItem": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "masterItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialProperty": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "channel": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "matStyle": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sendCheckNo": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "createCompanyID": {
+            "type": "string",
+            "nullable": true
+          },
+          "remark": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          },
+          "proAllowUsed": {
+            "type": "boolean"
+          },
+          "checkDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "checker": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkState": {
+            "type": "boolean"
+          },
+          "lockState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "syncState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modifyDTM": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "texture": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "styleID": {
+            "type": "string",
+            "nullable": true
+          },
+          "commodityLevelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "commodityProfileID": {
+            "type": "string",
+            "nullable": true
+          },
+          "factoryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "designNo": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "countryBarCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "sizeSection": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "shoeTreeNo": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "largeBase": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "clothesVersionID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "creator": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "createDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lan": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "factoryStyleNo": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "volume": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "weightNo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "boxBoard": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "season6": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "preVolumeModels": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proNature": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stuffName2": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          },
+          "lining": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          },
+          "filling": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          },
+          "execStandard": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "securityKind": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "washingMethod": {
+            "maxLength": 60,
+            "type": "string",
+            "nullable": true
+          },
+          "designNoColor": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "execStandardID": {
+            "type": "string",
+            "nullable": true
+          },
+          "washingMethodID": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityKindID": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCreateByStyle": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "batchNO": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "bandCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "listingBatch": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "groupFitName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "ornamentName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "prodStypleName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "situationName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "matPriceName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "fabricTypeName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "sourceMatName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "basicBarCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "tailBarCode": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "serialNo": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "materialType": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "materialLink": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "isHorizontal": {
+            "type": "boolean"
+          },
+          "virtualMat": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "carVersion": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          },
+          "pressID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "isCanotChk": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isOtherSystem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usedBatch": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "usedValidity": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "shelfLife": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minPackingQty": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          },
+          "packageName": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          },
+          "mainMaterial": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "netContent": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          },
+          "ingredientsContent": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "inPackageSize": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          },
+          "vipPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "styleName": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "soleMaterials": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "footInsoles": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "shoesFunction": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "productionPlace": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "innerBox": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "insideBox": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "subTypeID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "productionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "productFeature": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "isBuyout": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isProp": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sizeSpec": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "commonDataType": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "commonDataContent": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "horizontalContent": {
+            "maxLength": 160,
+            "type": "string",
+            "nullable": true
+          },
+          "verticalContent": {
+            "maxLength": 160,
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyYear": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isStandard": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "maxApplyNum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marketPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "insidePrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "itemClassType": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "propsClassType": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "typing": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isVirtualMat": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isImageData": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "extID": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "isSpecialMaterial": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "modifyer": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

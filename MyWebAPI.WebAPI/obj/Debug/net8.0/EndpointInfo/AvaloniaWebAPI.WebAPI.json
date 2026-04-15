@@ -1,0 +1,909 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "AvaloniaWebAPI.WebAPI",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/BasData/GetAllMaterials": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "ModifyDTM",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialById": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetPagedMaterials": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "searchKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "yearNo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "seasonId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "proAllowUsed",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialsByCode": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialsByName": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData": {
+      "post": {
+        "tags": [
+          "BasData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SD_Mat_Material"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SD_Mat_Material"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SD_Mat_Material"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BasData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SD_Mat_Material"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SD_Mat_Material"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SD_Mat_Material"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/DeleteMaterial": {
+      "delete": {
+        "tags": [
+          "BasData"
+        ],
+        "parameters": [
+          {
+            "name": "materialId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetMaterialsCountAsync": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetTest": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetUserByIdAsync": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BasData/GetAllUsersAsync": {
+      "get": {
+        "tags": [
+          "BasData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SD_Mat_Material": {
+        "type": "object",
+        "properties": {
+          "materialID": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorMaterialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "barCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialName": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialShortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "foreignName": {
+            "type": "string",
+            "nullable": true
+          },
+          "matTypeID": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardID": {
+            "type": "string",
+            "nullable": true
+          },
+          "kindID": {
+            "type": "string",
+            "nullable": true
+          },
+          "seriesID": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemID": {
+            "type": "string",
+            "nullable": true
+          },
+          "accreditID": {
+            "type": "string",
+            "nullable": true
+          },
+          "stuffID": {
+            "type": "string",
+            "nullable": true
+          },
+          "colorID": {
+            "type": "string",
+            "nullable": true
+          },
+          "colorName2": {
+            "type": "string",
+            "nullable": true
+          },
+          "sexID": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitID": {
+            "type": "string",
+            "nullable": true
+          },
+          "sizeTypeID": {
+            "type": "string",
+            "nullable": true
+          },
+          "yearNo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "seasonID": {
+            "type": "string",
+            "nullable": true
+          },
+          "newOld": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pictureCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "invSpec": {
+            "type": "string",
+            "nullable": true
+          },
+          "styleCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "season1": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season2": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season3": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season4": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "season5": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "proRetailPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "proSaleDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "subSeries": {
+            "type": "string",
+            "nullable": true
+          },
+          "subModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "subItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "masterItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialProperty": {
+            "type": "string",
+            "nullable": true
+          },
+          "channel": {
+            "type": "string",
+            "nullable": true
+          },
+          "matStyle": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sendCheckNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "createCompanyID": {
+            "type": "string",
+            "nullable": true
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          },
+          "proAllowUsed": {
+            "type": "boolean"
+          },
+          "checkDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "checker": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkState": {
+            "type": "boolean"
+          },
+          "lockState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "syncState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modifyDTM": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "texture": {
+            "type": "string",
+            "nullable": true
+          },
+          "styleID": {
+            "type": "string",
+            "nullable": true
+          },
+          "commodityLevelID": {
+            "type": "string",
+            "nullable": true
+          },
+          "commodityProfileID": {
+            "type": "string",
+            "nullable": true
+          },
+          "factoryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "designNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryBarCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "sizeSection": {
+            "type": "string",
+            "nullable": true
+          },
+          "shoeTreeNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "largeBase": {
+            "type": "string",
+            "nullable": true
+          },
+          "clothesVersionID": {
+            "type": "string",
+            "nullable": true
+          },
+          "creator": {
+            "type": "string",
+            "nullable": true
+          },
+          "createDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lan": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "factoryStyleNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "volume": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "weightNo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "boxBoard": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "season6": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "preVolumeModels": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proNature": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stuffName2": {
+            "type": "string",
+            "nullable": true
+          },
+          "lining": {
+            "type": "string",
+            "nullable": true
+          },
+          "filling": {
+            "type": "string",
+            "nullable": true
+          },
+          "execStandard": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityKind": {
+            "type": "string",
+            "nullable": true
+          },
+          "washingMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "designNoColor": {
+            "type": "string",
+            "nullable": true
+          },
+          "execStandardID": {
+            "type": "string",
+            "nullable": true
+          },
+          "washingMethodID": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityKindID": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCreateByStyle": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "batchNO": {
+            "type": "string",
+            "nullable": true
+          },
+          "bandCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "listingBatch": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupFitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ornamentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prodStypleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "situationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "matPriceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fabricTypeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceMatName": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialType": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "materialLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "longMetre": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "widthMetre": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "highMetre": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isHorizontal": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "grossWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "netWeight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "originCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "tariffRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "virtualMat": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "carVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "pressId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCanotChk": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isOtherSystem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usedValidity": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "usedBatch": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "shelfLife": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "packageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "mainMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "netContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "ingredientsContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "inPackageSize": {
+            "type": "string",
+            "nullable": true
+          },
+          "minPackingQty": {
+            "type": "string",
+            "nullable": true
+          },
+          "vipPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "styleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "soleMaterials": {
+            "type": "string",
+            "nullable": true
+          },
+          "footInsoles": {
+            "type": "string",
+            "nullable": true
+          },
+          "shoesFunction": {
+            "type": "string",
+            "nullable": true
+          },
+          "productionPlace": {
+            "type": "string",
+            "nullable": true
+          },
+          "innerBox": {
+            "type": "string",
+            "nullable": true
+          },
+          "insideBox": {
+            "type": "string",
+            "nullable": true
+          },
+          "subTypeID": {
+            "type": "string",
+            "nullable": true
+          },
+          "productionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isBuyout": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "productFeature": {
+            "type": "string",
+            "nullable": true
+          },
+          "isProp": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sizeSpec": {
+            "type": "string",
+            "nullable": true
+          },
+          "commonDataType": {
+            "type": "string",
+            "nullable": true
+          },
+          "commonDataContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "horizontalContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "verticalContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "warrantyYear": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isStandard": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "maxApplyNum": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marketPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "insidePrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "itemClassType": {
+            "type": "string",
+            "nullable": true
+          },
+          "propsClassType": {
+            "type": "string",
+            "nullable": true
+          },
+          "typing": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isVirtualMat": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isImageData": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isSpecialMaterial": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "extID": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifyer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

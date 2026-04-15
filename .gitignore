@@ -1,0 +1,14 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/.vs
+/MyWebAPI.Core/bin
+/MyWebAPI.Core/obj
+/MyWebAPI.Infrastructure/bin
+/MyWebAPI.Infrastructure/obj/Debug/net8.0
+/MyWebAPI.Infrastructure/obj
+/MyWebAPI.Service/bin
+/MyWebAPI.Service/obj
+/MyWebAPI.Tests/bin
+/MyWebAPI.Tests/obj
