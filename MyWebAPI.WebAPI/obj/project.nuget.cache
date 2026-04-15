@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NE48A75h0Hs=",
+  "dgSpecHash": "POeGkDWOJK8=",
   "success": true,
-  "projectFilePath": "D:\\test\\MyWebAPISolution\\MyWebAPI.WebAPI\\AvaloniaWebAPI.WebAPI.csproj",
+  "projectFilePath": "D:\\AvaloniaWebAPI.git\\MyWebAPI.WebAPI\\AvaloniaWebAPI.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lai.cj\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\lai.cj\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

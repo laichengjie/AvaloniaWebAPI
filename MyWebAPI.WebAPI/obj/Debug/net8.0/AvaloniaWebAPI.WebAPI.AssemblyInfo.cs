@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AvaloniaWebAPI.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f6276fbe031b67680fab1c5c2449d91a81c83d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("AvaloniaWebAPI.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AvaloniaWebAPI.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

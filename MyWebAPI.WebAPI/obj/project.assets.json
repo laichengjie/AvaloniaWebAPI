@@ -3223,11 +3223,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\test\\MyWebAPISolution\\MyWebAPI.WebAPI\\AvaloniaWebAPI.WebAPI.csproj",
+      "projectUniqueName": "D:\\AvaloniaWebAPI.git\\MyWebAPI.WebAPI\\AvaloniaWebAPI.WebAPI.csproj",
       "projectName": "AvaloniaWebAPI.WebAPI",
-      "projectPath": "D:\\test\\MyWebAPISolution\\MyWebAPI.WebAPI\\AvaloniaWebAPI.WebAPI.csproj",
+      "projectPath": "D:\\AvaloniaWebAPI.git\\MyWebAPI.WebAPI\\AvaloniaWebAPI.WebAPI.csproj",
       "packagesPath": "C:\\Users\\lai.cj\\.nuget\\packages\\",
-      "outputPath": "D:\\test\\MyWebAPISolution\\MyWebAPI.WebAPI\\obj\\",
+      "outputPath": "D:\\AvaloniaWebAPI.git\\MyWebAPI.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3250,8 +3250,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\test\\MyWebAPISolution\\MyWebAPI.Service\\AvaloniaWebAPI.Service.csproj": {
-              "projectPath": "D:\\test\\MyWebAPISolution\\MyWebAPI.Service\\AvaloniaWebAPI.Service.csproj"
+            "D:\\AvaloniaWebAPI.git\\MyWebAPI.Service\\AvaloniaWebAPI.Service.csproj": {
+              "projectPath": "D:\\AvaloniaWebAPI.git\\MyWebAPI.Service\\AvaloniaWebAPI.Service.csproj"
             }
           }
         }
