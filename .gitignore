@@ -2,18 +2,15 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
+# Visual Studio 配置目录
 /.vs
-/MyWebAPI.Core/bin
-/MyWebAPI.Core/obj
-/MyWebAPI.Infrastructure/bin
-/MyWebAPI.Infrastructure/obj/Debug/net8.0
-/MyWebAPI.Infrastructure/obj
-/MyWebAPI.Service/bin
-/MyWebAPI.Service/obj
-/MyWebAPI.Tests/bin
-/MyWebAPI.Tests/obj
-/MyWebAPI.WebAPI/bin
-/MyWebAPI.WebAPI/obj
+
+# 通用规则 - 忽略所有编译输出目录
+[Bb]in/
+[Oo]bj/
+
+# 如果你确实想保留通用规则，下面的具体路径可以全部删除（已由上面规则覆盖）
+# 但如果你担心误删重要文件，保留也没影响，只是冗余而已
 
 # Build results
 [Dd]ebug/
@@ -26,7 +23,5 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
-[Oo]bj/
 [Ll]og/
 [Ll]ogs/
