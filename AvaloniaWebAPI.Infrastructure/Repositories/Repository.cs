@@ -62,5 +62,10 @@ namespace AvaloniaWebAPI.Infrastructure.Repositories
                 return await _dbSet.CountAsync();
             return await _dbSet.CountAsync(predicate);
         }
+        // 新增：返回 IQueryable，使上层能在数据库端构造更复杂的查询（分页/排序等）
+        public IQueryable<T> Query()
+        {
+            return _dbSet.AsQueryable();
+        }
     }
 }

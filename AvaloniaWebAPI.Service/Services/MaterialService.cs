@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
-using AvaloniaWebAPI.Core.Entities;
+﻿using AvaloniaWebAPI.Core.Entities;
 using AvaloniaWebAPI.Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
 
 namespace AvaloniaWebAPI.Service.Services
 {
-    public class MaterialService : IMaterialService 
+    public class MaterialService : IMaterialService
     {
         private readonly IRepository<SD_Mat_Material> _materialRepository;
         private readonly ILogger<MaterialService> _logger;
@@ -23,31 +24,30 @@ namespace AvaloniaWebAPI.Service.Services
             return materials.FirstOrDefault();
         }
 
-       
-
         public async Task<IEnumerable<SD_Mat_Material>> GetAllMaterialsAsync(string? ModifyDTM)
         {
             try
             {
                 _logger.LogInformation($"查询货号数据，ModifyDTM: {ModifyDTM ?? "null"}");
 
-                // 如果没有提供日期或日期无效，返回所有数据
+                // 使用 IQueryable，避免把整个表拉到内存
+                var query = _materialRepository.Query();
+
                 if (string.IsNullOrWhiteSpace(ModifyDTM))
                 {
                     _logger.LogInformation("未提供修改时间，返回所有货号数据");
-                    return await _materialRepository.GetAllAsync();
+                    return await query.ToListAsync();
                 }
 
-                // 尝试解析日期
                 if (DateTime.TryParse(ModifyDTM, out var modifyDateTime))
                 {
                     _logger.LogInformation($"查询 ModifyDTM >= {modifyDateTime:yyyy-MM-dd HH:mm:ss} 的货号数据");
-                    return await _materialRepository.FindAsync(m => m.ModifyDTM >= modifyDateTime);
+                    query = query.Where(m => m.ModifyDTM >= modifyDateTime);
+                    return await query.ToListAsync();
                 }
 
-                // 日期格式无效，记录警告并返回所有数据
                 _logger.LogWarning($"无效的日期格式: {ModifyDTM}，返回所有货号数据");
-                return await _materialRepository.GetAllAsync();
+                return await query.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -134,13 +134,8 @@ namespace AvaloniaWebAPI.Service.Services
 
         public async Task<int> GetMaterialsCountAsync(Expression<Func<SD_Mat_Material, bool>>? predicate = null)
         {
-            if (predicate == null)
-            {
-                var all = await _materialRepository.GetAllAsync();
-                return all.Count();
-            }
-            var filtered = await _materialRepository.FindAsync(predicate);
-            return filtered.Count();
+            // 若需要 Count，直接使用仓储 CountAsync（已在 DB 层执行）
+            return await _materialRepository.CountAsync(predicate);
         }
 
         public async Task<(IEnumerable<SD_Mat_Material> Items, int Total)> GetPagedMaterialsAsync(
@@ -152,10 +147,9 @@ namespace AvaloniaWebAPI.Service.Services
         {
             _logger.LogInformation($"分页查询货号: Page={page}, PageSize={pageSize}");
 
-            var allMaterials = await _materialRepository.GetAllAsync();
-            var query = allMaterials.AsQueryable();
+            var query = _materialRepository.Query();
 
-            // 筛选条件
+            // 筛选条件（都在数据库端执行）
             if (!string.IsNullOrWhiteSpace(searchKey))
             {
                 query = query.Where(m =>
@@ -178,10 +172,11 @@ namespace AvaloniaWebAPI.Service.Services
             {
                 query = query.Where(m => m.ProAllowUsed == proAllowUsed.Value);
             }
-            // 按 MaterialID 排序（升序）
+
             query = query.OrderBy(m => m.MaterialID);
-            var total = query.Count();
-            var items = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var total = await query.CountAsync();
+            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return (items, total);
         }
