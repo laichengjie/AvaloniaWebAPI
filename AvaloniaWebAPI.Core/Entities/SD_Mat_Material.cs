@@ -1,0 +1,162 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AvaloniaWebAPI.Core.Entities
+{
+    [Table("SD_Mat_Material")]
+    public class SD_Mat_Material
+    { 
+        [Key]
+        public string MaterialID { get; set; } = string.Empty;
+        public string? VendorMaterialCode { get; set; }
+        public string MaterialCode { get; set; } = string.Empty;
+        public string? BarCode { get; set; }
+        public string? MaterialName { get; set; }
+        public string MaterialShortName { get; set; } = string.Empty;
+        public string? ForeignName { get; set; }
+        public string? MatTypeID { get; set; }
+        public string? CardID { get; set; }
+        public string? KindID { get; set; }
+        public string? SeriesID { get; set; }
+        public string? ModelID { get; set; }
+        public string? ItemID { get; set; }
+        public string? AccreditID { get; set; }
+        public string? StuffID { get; set; }
+        public string? ColorID { get; set; }
+        public string? ColorName2 { get; set; }
+        public string? SexID { get; set; }
+        public string? UnitID { get; set; }
+        public string? SizeTypeID { get; set; }
+        public int? YearNo { get; set; }
+        public string? SeasonID { get; set; }
+        public int? NewOld { get; set; }
+        public string? PictureCode { get; set; }
+        public string? InvSpec { get; set; }
+        public string? StyleCode { get; set; }
+        public bool? Season1 { get; set; }
+        public bool? Season2 { get; set; }
+        public bool? Season3 { get; set; }
+        public bool? Season4 { get; set; }
+        public bool? Season5 { get; set; }
+        public decimal? ProRetailPrice { get; set; }
+        public DateTime? ProSaleDate { get; set; }
+        public string? SubSeries { get; set; }
+        public string? SubModel { get; set; }
+        public string? SubItem { get; set; }
+        public string? MasterItem { get; set; }
+        public string? MaterialProperty { get; set; }
+        public string? Channel { get; set; }
+        public int? MatStyle { get; set; }
+        public string? SendCheckNo { get; set; }
+        public string? CreateCompanyID { get; set; }
+        public string? Remark { get; set; }
+        public bool ProAllowUsed { get; set; }
+        public DateTime? CheckDate { get; set; }
+        public string? Checker { get; set; }
+        public bool CheckState { get; set; }
+        public int? LockState { get; set; }
+        public int? SyncState { get; set; }
+        public DateTime ModifyDTM { get; set; }
+        public string? Texture { get; set; }
+        public string? StyleID { get; set; }
+        public string? CommodityLevelID { get; set; }
+        public string? CommodityProfileID { get; set; }
+        public string? FactoryNo { get; set; }
+        public string? DesignNo { get; set; }
+        public string? CountryBarCode { get; set; }
+        public string? SizeSection { get; set; }
+        public string? ShoeTreeNo { get; set; }
+        public string? LargeBase { get; set; }
+        public string? ClothesVersionID { get; set; }
+        public string? Creator { get; set; }
+        public DateTime? CreateDateTime { get; set; }
+        public int Lan { get; set; }
+        public string? FactoryStyleNo { get; set; }
+        public decimal? Volume { get; set; }
+        public decimal? WeightNo { get; set; }
+        public decimal? BoxBoard { get; set; }
+        public bool? Season6 { get; set; }
+        public int? PreVolumeModels { get; set; }
+        public int? ProNature { get; set; }
+        public string? StuffName2 { get; set; }
+        public string? Lining { get; set; }
+        public string? Filling { get; set; }
+        public string? ExecStandard { get; set; }
+        public string? SecurityKind { get; set; }
+        public string? WashingMethod { get; set; }
+        public string? DesignNoColor { get; set; }
+        public string? ExecStandardID { get; set; }
+        public string? WashingMethodID { get; set; }
+        public string? SecurityKindID { get; set; }
+        public bool? IsCreateByStyle { get; set; }
+        public string? BatchNO { get; set; }
+        public string? BandCode { get; set; }
+        public string? ListingBatch { get; set; }
+        public string? GroupFitName { get; set; }
+        public string? OrnamentName { get; set; }
+        public string? ProdStypleName { get; set; }
+        public string? SituationName { get; set; }
+        public string? MatPriceName { get; set; }
+        public string? FabricTypeName { get; set; }
+        public string? SourceMatName { get; set; }
+        //public string? BasicBarCode { get; set; }
+        //public string? TailBarCode { get; set; }
+        //public string? SerialNo { get; set; }
+        public int? MaterialType { get; set; }
+        public string? MaterialLink { get; set; }
+        public decimal? LongMetre { get; set; }
+        public decimal? WidthMetre { get; set; }
+        public decimal? HighMetre { get; set; }
+        public bool? IsHorizontal { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? NetWeight { get; set; }
+        public string? OriginCountry { get; set; }
+        public decimal? TariffRate { get; set; }
+        public bool? VirtualMat { get; set; }
+        public string? CarVersion { get; set; }
+        public string? PressId { get; set; }
+        public bool? IsCanotChk { get; set; }
+        public int? IsOtherSystem { get; set; }
+        public bool? UsedValidity { get; set; }
+        public bool? UsedBatch { get; set; }
+        public int? ShelfLife { get; set; }
+        public string? PackageName { get; set; }
+        public string? MainMaterial { get; set; }
+        public string? NetContent { get; set; }
+        public string? IngredientsContent { get; set; }
+        public string? InPackageSize { get; set; }
+        public string? MinPackingQty { get; set; }
+        public decimal? VIPPrice { get; set; }
+        public string? StyleName { get; set; }
+        public string? SoleMaterials { get; set; }
+        public string? FootInsoles { get; set; }
+        public string? ShoesFunction { get; set; }
+        public string? ProductionPlace { get; set; }
+        public string? InnerBox { get; set; }
+        public string? InsideBox { get; set; }
+        public string? SubTypeID { get; set; }
+        public DateTime? ProductionDate { get; set; }
+        public bool? IsBuyout { get; set; }
+        public string? ProductFeature { get; set; }
+        public bool? IsProp { get; set; }
+        public string? SizeSpec { get; set; }
+        public string? CommonDataType { get; set; }
+        public string? CommonDataContent { get; set; }
+        public string? HorizontalContent { get; set; }
+        public string? VerticalContent { get; set; }
+        public int? WarrantyYear { get; set; }
+        public bool? IsStandard { get; set; }
+        public int? MaxApplyNum { get; set; }
+        public decimal? MarketPrice { get; set; }
+        public decimal? InsidePrice { get; set; }
+        public string? ItemClassType { get; set; }
+        public string? PropsClassType { get; set; }
+        public int? Typing { get; set; }
+        public bool? IsVirtualMat { get; set; }
+        public bool? IsImageData { get; set; }
+        public bool? IsSpecialMaterial { get; set; }
+        public string? ExtID { get; set; }
+        public string? Modifyer { get; set; }
+    }
+
+}
