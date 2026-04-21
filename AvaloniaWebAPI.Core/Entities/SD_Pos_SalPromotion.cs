@@ -143,9 +143,29 @@ namespace AvaloniaWebAPI.Core.Entities
 
         // 在 SD_Pos_SalPromotion 类中添加
         [InverseProperty("Promotion")]
+        public virtual ICollection<SD_Pos_SalPromotionMaterial> PromotionMaterials { get; set; } = new List<SD_Pos_SalPromotionMaterial>();
+
+        [InverseProperty("Promotion")]
+        public virtual ICollection<SD_Pos_SalPromotionSetPresendPro> PromotionSetPresendPros { get; set; } = new List<SD_Pos_SalPromotionSetPresendPro>();
+
+        [InverseProperty("Promotion")]
+        public virtual ICollection<SD_Pos_SalPromotionSetPresendTHQ> PromotionSetPresendTHQs { get; set; } = new List<SD_Pos_SalPromotionSetPresendTHQ>();
+
+        [InverseProperty("Promotion")]
+        public virtual ICollection<SD_Pos_SalPromotionSetTHQ> PromotionSetTHQs { get; set; } = new List<SD_Pos_SalPromotionSetTHQ>();
+
+        [InverseProperty("Promotion")]
         public virtual ICollection<SD_Pos_SalPromotionShop> PromotionShops { get; set; } = new List<SD_Pos_SalPromotionShop>();
 
         [InverseProperty("Promotion")]
         public virtual ICollection<SD_Pos_SalPromotionVip> PromotionVips { get; set; } = new List<SD_Pos_SalPromotionVip>();
+
+  
+
+   
+
+
+
+
     }
-} 
+}  

@@ -8,4 +8,4 @@ namespace AvaloniaWebAPI.Core.Interfaces
         Task<IEnumerable<SD_Pos_SalPromotion>> GetAllSalPromotionsAsync(string ModifyDTM);
         
     }
-}
+} 

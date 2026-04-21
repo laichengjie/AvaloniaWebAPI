@@ -41,7 +41,13 @@ namespace AvaloniaWebAPI.Service.Services
                 }
 
                 // 最后 Include
-                var query = baseQuery.Include(p => p.PromotionShops).Include(p => p.PromotionVips);
+                var query = baseQuery
+                           .Include(p => p.PromotionShops)
+                           .Include(p => p.PromotionVips)
+                           .Include(p => p.PromotionMaterials)
+                           .Include(p => p.PromotionSetPresendPros)
+                           .Include(p => p.PromotionSetPresendTHQs)
+                           .Include(p => p.PromotionSetTHQs);
 
                 return await query.ToListAsync();
             }
