@@ -140,5 +140,9 @@ namespace AvaloniaWebAPI.Core.Entities
         public int? UpLoadERP2State { get; set; }
 
         public decimal? MarkDiscount { get; set; }
+
+        // 在 SD_Pos_SalPromotion 类中添加
+        [InverseProperty("Promotion")]
+        public virtual ICollection<SD_Pos_SalPromotionShop> PromotionShops { get; set; } = new List<SD_Pos_SalPromotionShop>();
     }
 }

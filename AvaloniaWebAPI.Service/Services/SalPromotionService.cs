@@ -21,24 +21,28 @@ namespace AvaloniaWebAPI.Service.Services
             try
             {
                 _logger.LogInformation($"查询促销活动数据，ModifyDTM: {ModifyDTM ?? "null"}");
-                 
-                // 使用 IQueryable，避免把整个表拉到内存 
-                var query = _materialRepository.Query();
 
-                if (string.IsNullOrWhiteSpace(ModifyDTM))
-                {
-                    _logger.LogInformation("未提供修改时间，返回所有促销活动数据");
-                    return await query.ToListAsync();
-                }
+                // 先定义 query 为 IQueryable 类型，避免类型不兼容
+                var baseQuery = _materialRepository.Query();
 
-                if (DateTime.TryParse(ModifyDTM, out var modifyDateTime))
+                // 先过滤，再 Include
+                if (!string.IsNullOrWhiteSpace(ModifyDTM) && DateTime.TryParse(ModifyDTM, out var modifyDateTime))
                 {
                     _logger.LogInformation($"查询 ModifyDTM >= {modifyDateTime:yyyy-MM-dd HH:mm:ss} 的促销活动数据");
-                    query = query.Where(m => m.ModifyDTM >= modifyDateTime);
-                    return await query.ToListAsync();
+                    baseQuery = baseQuery.Where(m => m.ModifyDTM >= modifyDateTime);
+                }
+                else if (!string.IsNullOrWhiteSpace(ModifyDTM))
+                {
+                    _logger.LogWarning($"无效的日期格式: {ModifyDTM}，返回所有促销活动数据");
+                }
+                else
+                {
+                    _logger.LogInformation("未提供修改时间，返回所有促销活动数据");
                 }
 
-                _logger.LogWarning($"无效的日期格式: {ModifyDTM}，返回所有促销活动数据");
+                // 最后 Include
+                var query = baseQuery.Include(p => p.PromotionShops);
+
                 return await query.ToListAsync();
             }
             catch (Exception ex)
@@ -48,6 +52,6 @@ namespace AvaloniaWebAPI.Service.Services
             }
         }
 
-        
+
     }
 }
