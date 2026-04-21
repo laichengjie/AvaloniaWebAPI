@@ -100,6 +100,7 @@ Console.WriteLine("使用 SQL Server 数据库");
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
+builder.Services.AddScoped<ISalPromotionService, SalPromotionService>();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
