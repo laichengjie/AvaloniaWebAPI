@@ -18,6 +18,8 @@ namespace AvaloniaWebAPI.Infrastructure.Data
         public DbSet<SD_Pos_SalPromotion> SalPromotions { get; set; }
 
         public DbSet<SD_Pos_SalPromotionShop> SalPromotionShops { get; set; }
+         
+        public DbSet<SD_Pos_SalPromotionVip> SalPromotionVips { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,8 +47,6 @@ namespace AvaloniaWebAPI.Infrastructure.Data
                
                 entity.HasKey(e => new { e.CompanyID, e.PromotionID, e.ShopID });
 
-          
-
                 // 索引
                 entity.HasIndex(e => e.PromotionID);
                 entity.HasIndex(e => e.ShopID);
@@ -57,6 +57,19 @@ namespace AvaloniaWebAPI.Infrastructure.Data
                       .HasForeignKey(e => new { e.CompanyID, e.PromotionID });
             });
 
+            modelBuilder.Entity<SD_Pos_SalPromotionVip>(entity =>
+            {
+
+                entity.HasKey(e => new { e.CompanyID, e.PromotionID, e.CardTypeID });
+
+                // 索引
+                entity.HasIndex(e => e.PromotionID);
+                entity.HasIndex(e => e.CardTypeID);
+                // 外键关系
+                entity.HasOne(e => e.Promotion)
+                      .WithMany(p => p.PromotionVips)
+                      .HasForeignKey(e => new { e.CompanyID, e.PromotionID });
+            });
 
         }
     }
