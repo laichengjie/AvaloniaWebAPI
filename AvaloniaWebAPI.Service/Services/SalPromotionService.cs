@@ -49,7 +49,34 @@ namespace AvaloniaWebAPI.Service.Services
                            .Include(p => p.PromotionSetPresendTHQs)
                            .Include(p => p.PromotionSetTHQs);
 
-                return await query.ToListAsync();
+                var result = await query.ToListAsync();
+
+                // 记录主表和从表数量
+                var mainCount = result.Count;
+                var shopsCount = result.Sum(p => p.PromotionShops?.Count ?? 0);
+                var vipsCount = result.Sum(p => p.PromotionVips?.Count ?? 0);
+                var materialsCount = result.Sum(p => p.PromotionMaterials?.Count ?? 0);
+                var presendProsCount = result.Sum(p => p.PromotionSetPresendPros?.Count ?? 0);
+                var presendTHQsCount = result.Sum(p => p.PromotionSetPresendTHQs?.Count ?? 0);
+                var setTHQsCount = result.Sum(p => p.PromotionSetTHQs?.Count ?? 0);
+
+                var totalDetailCount = shopsCount + vipsCount + materialsCount +
+                                       presendProsCount + presendTHQsCount + setTHQsCount;
+                var grandTotal = mainCount + totalDetailCount;
+
+                _logger.LogInformation(
+                    $"查询完成 - 活动记录数: {mainCount}, " +
+                    $"店铺数量: {shopsCount}, " +
+                    $"会员数量: {vipsCount}, " +
+                    $"货号数量: {materialsCount}, " +
+                    $"预设优惠券数量: {presendProsCount}, " +
+                    $"预设赠送优惠券数量: {presendTHQsCount}, " +
+                    $"优惠券数量: {setTHQsCount}, " +
+                    $"从表合计: {totalDetailCount}, " +
+                    $"总计(主表+从表): {grandTotal}"
+                );
+
+                return result;
             }
             catch (Exception ex)
             {
