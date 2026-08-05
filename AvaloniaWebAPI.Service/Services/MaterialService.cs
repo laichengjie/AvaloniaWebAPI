@@ -18,7 +18,7 @@ namespace AvaloniaWebAPI.Service.Services
             _logger = logger;
         }
 
-        public async Task<PagedResult<SD_Mat_Material>> GetAllMaterialsAsync(PlatformBasicDataRequest request)
+        public async Task<PlatformBasicDataResult<SD_Mat_Material>> GetMaterialsAsync(PlatformBasicDataRequest request)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace AvaloniaWebAPI.Service.Services
                     
                 }
                 var items = await query.ToListAsync();
-                return new PagedResult<SD_Mat_Material>
+                return new PlatformBasicDataResult<SD_Mat_Material>
                 {
                     items = items,
                     totalCount = items.Count,

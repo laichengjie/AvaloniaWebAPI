@@ -19,7 +19,7 @@ namespace AvaloniaWebAPI.Service.Services
         }
 
 
-        public async Task<PagedResult<bas_brand>> GetAllBrandsAsync(PlatformBasicDataRequest request)
+        public async Task<PlatformBasicDataResult<bas_brand>> GetBrandsAsync(PlatformBasicDataRequest request)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace AvaloniaWebAPI.Service.Services
                     
                 }
                 var items = await query.ToListAsync();
-                return new PagedResult<bas_brand>
+                return new PlatformBasicDataResult<bas_brand>
                 {
                     items = items,
                     totalCount = items.Count,

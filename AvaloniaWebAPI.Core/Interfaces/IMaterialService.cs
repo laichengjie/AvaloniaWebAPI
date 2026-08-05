@@ -6,6 +6,6 @@ namespace AvaloniaWebAPI.Core.Interfaces
 {
     public interface IMaterialService
     {
-        Task<PagedResult<SD_Mat_Material>> GetAllMaterialsAsync(PlatformBasicDataRequest request);
+        Task<PlatformBasicDataResult<SD_Mat_Material>> GetMaterialsAsync(PlatformBasicDataRequest request);
     }
 }

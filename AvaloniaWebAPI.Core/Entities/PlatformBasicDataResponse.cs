@@ -3,7 +3,7 @@
     /// <summary>
     /// 统一 API 响应格式（泛型）
     /// </summary>
-    public class ApiResponse<T>
+    public class PlatformBasicDataResponse<T>
     {
         /// <summary>
         /// 状态码：0=成功，其他=失败
@@ -20,11 +20,11 @@
         /// </summary>
         public T? resultInfo { get; set; }
     }
-
+     
     /// <summary>
     /// 统一 API 响应格式（非泛型）
     /// </summary>
-    public class ApiResponse
+    public class PlatformBasicDataResponse
     {
         /// <summary>
         /// 状态码：0=成功，其他=失败

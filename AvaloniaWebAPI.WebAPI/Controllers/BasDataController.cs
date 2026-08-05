@@ -42,10 +42,10 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                 _logger.LogInformation($"开始获取促销活动列表，参数 ModifyDTM: {ModifyDTM ?? "null"}");
 
                 // 获取促销活动数据
-                var result = await _salPromotionService.GetAllSalPromotionsAsync(ModifyDTM);
+                var result = await _salPromotionService.GetSalPromotionsAsync(ModifyDTM);
 
                 _logger.LogInformation($"获取促销活动成功，共 {result.totalCount} 条记录");
-                return Ok(new ApiResponse<object>
+                return Ok(new PlatformBasicDataResponse<object>
                 {
                     code = 0,
                     msg = "获取促销活动信息成功",
@@ -55,7 +55,7 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "获取促销活动失败");
-                return Ok(new ApiResponse<object>
+                return Ok(new PlatformBasicDataResponse<object>
                 {
                     code = -1,
                     msg = $"获取用户失败：{ex.Message}",
@@ -78,11 +78,11 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
             {
                 _logger.LogInformation("开始获取所有用户");
 
-                var result = await _userService.GetAllUsersAsync();
+                var result = await _userService.GetUsersAsync();
 
                 _logger.LogInformation($"获取用户成功，共 {result.totalCount} 条记录");
 
-                return Ok(new ApiResponse<object>
+                return Ok(new PlatformBasicDataResponse<object>
                 {
                     code = 0,
                     msg = "获取用户信息成功",
@@ -92,7 +92,7 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "获取用户失败");
-                return Ok(new ApiResponse<object>
+                return Ok(new PlatformBasicDataResponse<object>
                 {
                     code = -1,
                     msg = $"获取用户失败：{ex.Message}",
@@ -119,19 +119,19 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
 
                 switch (request.DataMethod)
                 {
-                    case "GetAllMaterials":
-                        var materialResult = await _materialService.GetAllMaterialsAsync(request);
+                    case "GetMaterials":
+                        var materialResult = await _materialService.GetMaterialsAsync(request);
                         result = materialResult;
                         totalCount = materialResult?.totalCount ?? 0;
                         break;
-                    case "GetAllBrands":
-                        var brandResult = await _basBrandService.GetAllBrandsAsync(request);
+                    case "GetBrands":
+                        var brandResult = await _basBrandService.GetBrandsAsync(request);
                         result = brandResult;
                         totalCount = brandResult?.totalCount ?? 0;
                         break;
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);
-                        return Ok(new ApiResponse<object>
+                        return Ok(new PlatformBasicDataResponse<object>
                         {
                             code = -1,
                             msg = $"不支持的数据类型: {request.DataMethod}",
@@ -141,7 +141,7 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
 
                 _logger.LogInformation("获取{DataMethod}成功，共 {TotalCount} 条记录", dataType, totalCount);
 
-                return Ok(new ApiResponse<object>
+                return Ok(new PlatformBasicDataResponse<object>
                 {
                     code = 0,
                     msg = $"获取{dataType}成功",
@@ -151,7 +151,7 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "获取{DataMethod}失败，参数: {@Request}", request.DataMethod, request);
-                return Ok(new ApiResponse<object>
+                return Ok(new PlatformBasicDataResponse<object>
                 {
                     code = -1,
                     msg = $"获取数据失败：{ex.Message}",

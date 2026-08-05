@@ -9,6 +9,6 @@ namespace AvaloniaWebAPI.Core.Interfaces
         /// <summary>
         /// 获取所有品牌
         /// </summary>
-        Task<PagedResult<bas_brand>> GetAllBrandsAsync(PlatformBasicDataRequest request);
+        Task<PlatformBasicDataResult<bas_brand>> GetBrandsAsync(PlatformBasicDataRequest request);
     }
 }

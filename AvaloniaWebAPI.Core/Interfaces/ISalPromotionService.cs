@@ -5,6 +5,6 @@ namespace AvaloniaWebAPI.Core.Interfaces
 {
     public interface ISalPromotionService
     {
-        Task<PagedResult<SD_Pos_SalPromotion>>  GetAllSalPromotionsAsync(string? ModifyDTM);
+        Task<PlatformBasicDataResult<SD_Pos_SalPromotion>>  GetSalPromotionsAsync(string? ModifyDTM);
     }
 }

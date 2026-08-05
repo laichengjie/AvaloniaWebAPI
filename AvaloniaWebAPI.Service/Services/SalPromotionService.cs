@@ -17,7 +17,7 @@ namespace AvaloniaWebAPI.Service.Services
             _logger = logger;
         }
 
-        public async Task<PagedResult<SD_Pos_SalPromotion>> GetAllSalPromotionsAsync(string? ModifyDTM)
+        public async Task<PlatformBasicDataResult<SD_Pos_SalPromotion>> GetSalPromotionsAsync(string? ModifyDTM)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace AvaloniaWebAPI.Service.Services
                     $"总计(主表+从表): {grandTotal}"
                 );
 
-                return new PagedResult<SD_Pos_SalPromotion>
+                return new PlatformBasicDataResult<SD_Pos_SalPromotion>
                 {
                     items = result,
                     totalCount = result.Count,

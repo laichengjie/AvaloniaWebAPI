@@ -3,9 +3,9 @@
     /// <summary>
     /// 分页响应数据
     /// </summary>
-    public class PagedResult<T>
+    public class PlatformBasicDataResult<T>
     {
-        /// <summary>
+        /// <summary> 
         /// 数据列表
         /// </summary>
         public List<T> items { get; set; } = new List<T>();

@@ -15,7 +15,7 @@ namespace AvaloniaWebAPI.Service.Services
             _logger = logger;
         }
 
-        public async Task<PagedResult<User>> GetAllUsersAsync()
+        public async Task<PlatformBasicDataResult<User>> GetUsersAsync()
         {
             try
             {
@@ -26,7 +26,7 @@ namespace AvaloniaWebAPI.Service.Services
 
                 _logger.LogInformation($"获取用户成功，共 {userList.Count} 条记录");
 
-                return new PagedResult<User>
+                return new PlatformBasicDataResult<User>
                 {
                     items = userList,
                     totalCount = userList.Count,
