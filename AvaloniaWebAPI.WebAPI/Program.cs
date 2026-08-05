@@ -118,6 +118,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<ISalPromotionService, SalPromotionService>();
+builder.Services.AddScoped<IBasBrandService, BasBrandService>();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();

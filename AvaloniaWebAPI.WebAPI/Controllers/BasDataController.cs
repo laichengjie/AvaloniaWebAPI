@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using AvaloniaWebAPI.Core.Entities;
+﻿using AvaloniaWebAPI.Core.Entities;
 using AvaloniaWebAPI.Core.Interfaces;
+using AvaloniaWebAPI.Service.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -16,50 +17,17 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
         private readonly IMaterialService _materialService;
         private readonly ISalPromotionService _salPromotionService;
         private readonly ILogger<BasDataController> _logger;
-        public BasDataController(IUserService userService, IMaterialService materialService, ILogger<BasDataController> logger, ISalPromotionService salPromotionService)
+        private readonly IBasBrandService _basBrandService;
+        public BasDataController(IUserService userService, IMaterialService materialService, ILogger<BasDataController> logger, ISalPromotionService salPromotionService, IBasBrandService basBrandService)
         {
             _userService = userService;
             _materialService = materialService;
             _logger = logger;
             _salPromotionService = salPromotionService;
+            _basBrandService = basBrandService;
         }
 
-        #region 货品资料
-        /// <summary> 
-        /// 获取所有货号
-        /// </summary>
-        [HttpGet("GetAllMaterials")]
-        public async Task<IActionResult> GetAllMaterials(string? ModifyDTM = null)
-        {
-            try
-            {
-                _logger.LogInformation($"开始获取货号列表，参数 ModifyDTM: {ModifyDTM ?? "null"}");
-
-                // 获取已构造好的分页结果
-                var result = await _materialService.GetAllMaterialsAsync(ModifyDTM);
-
-                _logger.LogInformation($"获取货号列表成功，共 {result.totalCount} 条记录");
-
-                return Ok(new ApiResponse<object>
-                {
-                    code = 0,
-                    msg = "获取货号列表成功",
-                    resultInfo = result
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "获取货号列表失败，参数 ModifyDTM: {ModifyDTM}", ModifyDTM);
-                return Ok(new ApiResponse<object>
-                {
-                    code = -1,
-                    msg = $"获取货号列表失败：{ex.Message}",
-                    resultInfo = null
-                });
-            }
-        }
-
-        #endregion
+        
 
         #region 促销活动
 
@@ -155,6 +123,11 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         var materialResult = await _materialService.GetAllMaterialsAsync(request);
                         result = materialResult;
                         totalCount = materialResult?.totalCount ?? 0;
+                        break;
+                    case "GetAllBrands":
+                        var brandResult = await _basBrandService.GetAllBrandsAsync(request);
+                        result = brandResult;
+                        totalCount = brandResult?.totalCount ?? 0;
                         break;
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);

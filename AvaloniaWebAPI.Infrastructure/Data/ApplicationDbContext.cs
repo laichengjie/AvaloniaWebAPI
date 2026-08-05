@@ -23,6 +23,8 @@ namespace AvaloniaWebAPI.Infrastructure.Data
         public DbSet<SD_Pos_SalPromotionSetPresendTHQ> SalPromotionSetPresendTHQs { get; set; }
         public DbSet<SD_Pos_SalPromotionSetTHQ> SalPromotionSetTHQs { get; set; }
 
+        public DbSet<bas_brand> BasBrands { get; set; }  // 添加这行
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
