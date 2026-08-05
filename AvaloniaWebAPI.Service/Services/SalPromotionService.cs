@@ -16,7 +16,8 @@ namespace AvaloniaWebAPI.Service.Services
             _materialRepository = materialRepository;
             _logger = logger;
         }
-        public async Task<IEnumerable<SD_Pos_SalPromotion>> GetAllSalPromotionsAsync(string? ModifyDTM)
+
+        public async Task<PagedResult<SD_Pos_SalPromotion>> GetAllSalPromotionsAsync(string? ModifyDTM)
         {
             try
             {
@@ -50,6 +51,7 @@ namespace AvaloniaWebAPI.Service.Services
                            .Include(p => p.PromotionSetTHQs);
 
                 var result = await query.ToListAsync();
+                var queryTime = DateTime.Now;
 
                 // 记录主表和从表数量
                 var mainCount = result.Count;
@@ -76,7 +78,12 @@ namespace AvaloniaWebAPI.Service.Services
                     $"总计(主表+从表): {grandTotal}"
                 );
 
-                return result;
+                return new PagedResult<SD_Pos_SalPromotion>
+                {
+                    items = result,
+                    totalCount = result.Count,
+                    queryTime = queryTime
+                };
             }
             catch (Exception ex)
             {
@@ -84,7 +91,5 @@ namespace AvaloniaWebAPI.Service.Services
                 throw;
             }
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AvaloniaWebAPI.Core.Entities;
+using AvaloniaWebAPI.Core.Entities;
 using AvaloniaWebAPI.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,7 +18,7 @@ namespace AvaloniaWebAPI.Service.Services
             _logger = logger;
         }
 
-        public async Task<IEnumerable<SD_Mat_Material>> GetAllMaterialsAsync(string? ModifyDTM)
+        public async Task<PagedResult<SD_Mat_Material>> GetAllMaterialsAsync(string? ModifyDTM)
         {
             try
             {
@@ -25,22 +26,41 @@ namespace AvaloniaWebAPI.Service.Services
 
                 // 使用 IQueryable，避免把整个表拉到内存
                 var query = _materialRepository.Query();
+                var queryTime = DateTime.Now;
 
                 if (string.IsNullOrWhiteSpace(ModifyDTM))
                 {
                     _logger.LogInformation("未提供修改时间，返回所有货号数据");
-                    return await query.ToListAsync();
+                    var items = await query.ToListAsync();
+                    return new PagedResult<SD_Mat_Material>
+                    {
+                        items = items,
+                        totalCount = items.Count,
+                        queryTime = queryTime
+                    };
                 }
 
                 if (DateTime.TryParse(ModifyDTM, out var modifyDateTime))
                 {
                     _logger.LogInformation($"查询 ModifyDTM >= {modifyDateTime:yyyy-MM-dd HH:mm:ss} 的货号数据");
                     query = query.Where(m => m.ModifyDTM >= modifyDateTime);
-                    return await query.ToListAsync();
+                    var items = await query.ToListAsync();
+                    return new PagedResult<SD_Mat_Material>
+                    {
+                        items = items,
+                        totalCount = items.Count,
+                        queryTime = queryTime
+                    };
                 }
 
                 _logger.LogWarning($"无效的日期格式: {ModifyDTM}，返回所有货号数据");
-                return await query.ToListAsync();
+                var allItems = await query.ToListAsync();
+                return new PagedResult<SD_Mat_Material>
+                {
+                    items = allItems,
+                    totalCount = allItems.Count,
+                    queryTime = queryTime
+                };
             }
             catch (Exception ex)
             {
@@ -48,51 +68,35 @@ namespace AvaloniaWebAPI.Service.Services
                 throw;
             }
         }
-
-        
-        
-
-        public async Task<(IEnumerable<SD_Mat_Material> Items, int Total)> GetPagedMaterialsAsync(
-            int page, int pageSize,
-            string? searchKey = null,
-            int? yearNo = null,
-            string? seasonId = null,
-            bool? proAllowUsed = null)
+        public async Task<PagedResult<SD_Mat_Material>> GetAllMaterialsAsync(PlatformBasicDataRequest request)
         {
-            _logger.LogInformation($"分页查询货号: Page={page}, PageSize={pageSize}");
-
-            var query = _materialRepository.Query();
-
-            // 筛选条件（都在数据库端执行）
-            if (!string.IsNullOrWhiteSpace(searchKey))
+            try
             {
-                query = query.Where(m =>
-                    (m.MaterialCode != null && m.MaterialCode.Contains(searchKey)) ||
-                    (m.MaterialName != null && m.MaterialName.Contains(searchKey)) ||
-                    (m.BarCode != null && m.BarCode.Contains(searchKey)));
-            }
+                _logger.LogInformation($"查询货号数据，ModifyDTM: {(request.ModifyDTM == null ? "null" : request.ModifyDTM.Value.ToString("yyyy-MM-dd HH:mm:ss"))}");
+                // 使用 IQueryable，避免把整个表拉到内存
+                var query = _materialRepository.Query();
+                var queryTime = DateTime.Now;
 
-            if (yearNo.HasValue)
+                if (request.ModifyDTM!=null)
+                {
+                    _logger.LogInformation($"查询 ModifyDTM >= {request.ModifyDTM:yyyy-MM-dd HH:mm:ss} 的货号数据");
+                    query = query.Where(m => m.ModifyDTM >= request.ModifyDTM);
+                    
+                }
+                var items = await query.ToListAsync();
+                return new PagedResult<SD_Mat_Material>
+                {
+                    items = items,
+                    totalCount = items.Count,
+                    queryTime = queryTime
+                };
+
+            }
+            catch (Exception ex)
             {
-                query = query.Where(m => m.YearNo == yearNo.Value);
+                _logger.LogError(ex, $"查询货号数据失败，ModifyDTM: {request.ModifyDTM:yyyy-MM-dd HH:mm:ss}");
+                throw;
             }
-
-            if (!string.IsNullOrWhiteSpace(seasonId))
-            {
-                query = query.Where(m => m.SeasonID == seasonId);
-            }
-
-            if (proAllowUsed.HasValue)
-            {
-                query = query.Where(m => m.ProAllowUsed == proAllowUsed.Value);
-            }
-
-            query = query.OrderBy(m => m.MaterialID);
-
-            var total = await query.CountAsync();
-            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-
-            return (items, total);
         }
     }
 }

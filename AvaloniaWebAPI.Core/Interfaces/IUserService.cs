@@ -9,6 +9,6 @@ namespace AvaloniaWebAPI.Core.Interfaces
 {
     public  interface IUserService
     {
-        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<PagedResult<User>>  GetAllUsersAsync();
     }
 }
