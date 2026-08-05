@@ -6,6 +6,7 @@ using AvaloniaWebAPI.Infrastructure.Repositories;
 using AvaloniaWebAPI.Service.Services;
 using System.IO.Compression;
 using System.Linq;
+using MySqlConnector; // 如果使用 Pomelo，这个会自动引用
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,31 +62,49 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ========== 关键修改：统一端口配置 ==========
-// 开发环境和生产环境都只使用 HTTP，避免 HTTPS 问题
+// 统一端口配置
 builder.WebHost.UseUrls("http://localhost:5000", "http://*:5000");
 
-// 或者根据环境配置
-// if (builder.Environment.IsDevelopment())
-// {
-//     builder.WebHost.UseUrls("http://localhost:5000");
-// }
-// else
-// {
-//     builder.WebHost.UseUrls("http://*:5000");
-// }
+// ========== 数据库配置（支持 SQL Server 和 MySQL 切换） ==========
+var dbType = builder.Configuration["Database:Type"] ?? "SqlServer";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// 数据库配置
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseSqlServer(connectionString, sqlOptions =>
+    switch (dbType.ToLower())
     {
-        sqlOptions.CommandTimeout(600);
-        sqlOptions.EnableRetryOnFailure(5);
-        sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-        sqlOptions.MaxBatchSize(100);
-    });
+        case "mysql":
+            // 使用 MySQL
+            options.UseMySql(connectionString,
+                new MySqlServerVersion(new Version(8, 0, 0)),
+                sqlOptions =>
+                {
+                    sqlOptions.CommandTimeout(600);
+                    sqlOptions.EnableRetryOnFailure(5);
+                    sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                    sqlOptions.MaxBatchSize(100);
+                });
+            Console.WriteLine("✅ 使用 MySQL 数据库");
+            break;
+
+        //case "sqlite":
+        //    // 使用 SQLite
+        //    options.UseSqlite(connectionString);
+        //    Console.WriteLine("✅ 使用 SQLite 数据库");
+        //    break;
+
+        default:
+            // 默认使用 SQL Server
+            options.UseSqlServer(connectionString, sqlOptions =>
+            {
+                sqlOptions.CommandTimeout(600);
+                sqlOptions.EnableRetryOnFailure(5);
+                sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                sqlOptions.MaxBatchSize(100);
+            });
+            Console.WriteLine("✅ 使用 SQL Server 数据库");
+            break;
+    }
 
     if (builder.Environment.IsDevelopment())
     {
@@ -93,8 +112,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.EnableDetailedErrors();
     }
 });
-
-Console.WriteLine("使用 SQL Server 数据库");
 
 // 依赖注入
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -144,7 +161,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    // ========== 关键修改：注释掉 HTTPS 重定向 ==========
+    // 注释掉 HTTPS 重定向
     // app.UseHttpsRedirection();
 }
 
@@ -153,6 +170,7 @@ app.MapControllers();
 
 // 输出启动信息
 Console.WriteLine($"环境: {app.Environment.EnvironmentName}");
+Console.WriteLine($"数据库类型: {dbType}");
 Console.WriteLine($"启动地址: http://localhost:5000");
 Console.WriteLine($"CORS: 已启用，允许所有来源");
 Console.WriteLine($"响应压缩: 已启用 (Gzip)");

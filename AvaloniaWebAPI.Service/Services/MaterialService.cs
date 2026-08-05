@@ -17,13 +17,6 @@ namespace AvaloniaWebAPI.Service.Services
             _logger = logger;
         }
 
-        public async Task<SD_Mat_Material?> GetMaterialByIdAsync(string materialId)
-        {
-            _logger.LogInformation($"查询货号: MaterialID={materialId}");
-            var materials = await _materialRepository.FindAsync(m => m.MaterialID == materialId);
-            return materials.FirstOrDefault();
-        }
-
         public async Task<IEnumerable<SD_Mat_Material>> GetAllMaterialsAsync(string? ModifyDTM)
         {
             try
@@ -56,87 +49,8 @@ namespace AvaloniaWebAPI.Service.Services
             }
         }
 
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsAsync(Expression<Func<SD_Mat_Material, bool>> predicate)
-        {
-            return await _materialRepository.FindAsync(predicate);
-        }
-
-        public async Task<SD_Mat_Material> CreateMaterialAsync(SD_Mat_Material material)
-        {
-            _logger.LogInformation($"创建货号: {material.MaterialCode}");
-
-            // 检查是否已存在
-            var exists = await MaterialExistsAsync(material.MaterialID);
-            if (exists)
-            {
-                throw new InvalidOperationException($"货号已存在: {material.MaterialID}");
-            }
-
-            material.ModifyDTM = DateTime.Now;
-            material.CreateDateTime = material.CreateDateTime ?? DateTime.Now;
-
-            return await _materialRepository.AddAsync(material);
-        }
-
-        public async Task UpdateMaterialAsync(SD_Mat_Material material)
-        {
-            _logger.LogInformation($"更新货号: {material.MaterialID}");
-            material.ModifyDTM = DateTime.Now;
-            await _materialRepository.UpdateAsync(material);
-        }
-
-        public async Task DeleteMaterialAsync(string materialId)
-        {
-            _logger.LogInformation($"删除货号: {materialId}");
-            var material = await GetMaterialByIdAsync(materialId);
-            if (material != null)
-            {
-                await _materialRepository.DeleteAsync(material);
-            }
-        }
-
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsByCodeAsync(string materialCode)
-        {
-            return await _materialRepository.FindAsync(m => m.MaterialCode.Contains(materialCode));
-        }
-
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsByNameAsync(string materialName)
-        {
-            return await _materialRepository.FindAsync(m =>
-                m.MaterialName != null && m.MaterialName.Contains(materialName));
-        }
-
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsByYearAsync(int yearNo)
-        {
-            return await _materialRepository.FindAsync(m => m.YearNo == yearNo);
-        }
-
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsBySeasonAsync(string seasonId)
-        {
-            return await _materialRepository.FindAsync(m => m.SeasonID == seasonId);
-        }
-
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsByCompanyAsync(string companyId)
-        {
-            return await _materialRepository.FindAsync(m => m.CreateCompanyID == companyId);
-        }
-
-        public async Task<IEnumerable<SD_Mat_Material>> GetMaterialsByTypeAsync(string matTypeId)
-        {
-            return await _materialRepository.FindAsync(m => m.MatTypeID == matTypeId);
-        }
-
-        public async Task<bool> MaterialExistsAsync(string materialId)
-        {
-            var materials = await _materialRepository.FindAsync(m => m.MaterialID == materialId);
-            return materials.Any();
-        }
-
-        public async Task<int> GetMaterialsCountAsync(Expression<Func<SD_Mat_Material, bool>>? predicate = null)
-        {
-            // 若需要 Count，直接使用仓储 CountAsync（已在 DB 层执行）
-            return await _materialRepository.CountAsync(predicate);
-        }
+        
+        
 
         public async Task<(IEnumerable<SD_Mat_Material> Items, int Total)> GetPagedMaterialsAsync(
             int page, int pageSize,
