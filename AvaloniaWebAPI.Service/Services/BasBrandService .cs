@@ -28,7 +28,7 @@ namespace AvaloniaWebAPI.Service.Services
                 var query = _materialRepository.Query();
                 var queryTime = DateTime.Now;
 
-                if (request.ModifyDTM!=null)
+                if (request.ModifyDTM!=null) 
                 {
                     _logger.LogInformation($"查询 ModifyDTM >= {request.ModifyDTM:yyyy-MM-dd HH:mm:ss} 的品牌表数据");
                     query = query.Where(m => m.modified_time >= request.ModifyDTM);

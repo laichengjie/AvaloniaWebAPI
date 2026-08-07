@@ -24,6 +24,7 @@ namespace AvaloniaWebAPI.Infrastructure.Data
         public DbSet<SD_Pos_SalPromotionSetTHQ> SalPromotionSetTHQs { get; set; }
 
         public DbSet<bas_brand> BasBrands { get; set; }  // 添加这行
+        public DbSet<bas_category> bas_categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

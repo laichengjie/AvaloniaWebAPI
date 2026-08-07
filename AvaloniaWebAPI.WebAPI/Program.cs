@@ -119,6 +119,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<ISalPromotionService, SalPromotionService>();
 builder.Services.AddScoped<IBasBrandService, BasBrandService>();
+builder.Services.AddScoped<IBasCategoryService, BasCategoryService>();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
