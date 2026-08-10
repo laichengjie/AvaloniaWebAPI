@@ -6,6 +6,6 @@ namespace AvaloniaWebAPI.Core.Interfaces
 {
     public interface IGetBasicDataService
     {
-        Task<PlatformBasicDataResult<T>> GetClassAsync<T>(PlatformBasicDataRequest request);
+        Task<PlatformBasicDataResult<T>> GetBasicDataAsync<T>(PlatformBasicDataRequest request);
     }
-} 
+}  

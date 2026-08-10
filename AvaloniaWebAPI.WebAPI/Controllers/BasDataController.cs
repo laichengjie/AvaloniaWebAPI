@@ -60,224 +60,224 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
 
                     case "GetCategory":
                         request.TableName = "bas_category";
-                        var categoryResult = await _getBasicDataService.GetClassAsync<bas_category>(request);
+                        var categoryResult = await _getBasicDataService.GetBasicDataAsync<bas_category>(request);
                         result = categoryResult;
                         totalCount = categoryResult?.totalCount ?? 0;
                         break;
 
                     case "GetClass":
                         request.TableName = "bas_class";
-                        var classResult = await _getBasicDataService.GetClassAsync<bas_class>(request);
+                        var classResult = await _getBasicDataService.GetBasicDataAsync<bas_class>(request);
                         result = classResult;
                         totalCount = classResult?.totalCount ?? 0;
                         break;
 
                     case "GetCurrency":
                         request.TableName = "bas_currency";
-                        var currencyResult = await _getBasicDataService.GetClassAsync<bas_currency>(request);
+                        var currencyResult = await _getBasicDataService.GetBasicDataAsync<bas_currency>(request);
                         result = currencyResult;
                         totalCount = currencyResult?.totalCount ?? 0;
                         break;
 
                     case "GetCustomProduct":
                         request.TableName = "bas_custom_product";
-                        var customProductResult = await _getBasicDataService.GetClassAsync<bas_custom_product>(request);
+                        var customProductResult = await _getBasicDataService.GetBasicDataAsync<bas_custom_product>(request);
                         result = customProductResult;
                         totalCount = customProductResult?.totalCount ?? 0;
                         break;
 
                     case "GetCustomPropertyValue":
                         request.TableName = "bas_custom_property_value";
-                        var customPropertyValueResult = await _getBasicDataService.GetClassAsync<bas_custom_property_value>(request);
+                        var customPropertyValueResult = await _getBasicDataService.GetBasicDataAsync<bas_custom_property_value>(request);
                         result = customPropertyValueResult;
                         totalCount = customPropertyValueResult?.totalCount ?? 0;
                         break;
 
                     case "GetDict":
                         request.TableName = "bas_dict";
-                        var dictResult = await _getBasicDataService.GetClassAsync<bas_dict>(request);
+                        var dictResult = await _getBasicDataService.GetBasicDataAsync<bas_dict>(request);
                         result = dictResult;
                         totalCount = dictResult?.totalCount ?? 0;
                         break;
 
                     case "GetDictItem":
                         request.TableName = "bas_dict_item";
-                        var dictItemResult = await _getBasicDataService.GetClassAsync<bas_dict_item>(request);
+                        var dictItemResult = await _getBasicDataService.GetBasicDataAsync<bas_dict_item>(request);
                         result = dictItemResult;
                         totalCount = dictItemResult?.totalCount ?? 0;
                         break;
 
                     case "GetEmployee":
                         request.TableName = "bas_employee";
-                        var employeeResult = await _getBasicDataService.GetClassAsync<bas_employee>(request);
+                        var employeeResult = await _getBasicDataService.GetBasicDataAsync<bas_employee>(request);
                         result = employeeResult;
                         totalCount = employeeResult?.totalCount ?? 0;
                         break;
 
                     case "GetEmployeeShop":
                         request.TableName = "bas_employee_shop";
-                        var employeeShopResult = await _getBasicDataService.GetClassAsync<bas_employee_shop>(request);
+                        var employeeShopResult = await _getBasicDataService.GetBasicDataAsync<bas_employee_shop>(request);
                         result = employeeShopResult;
                         totalCount = employeeShopResult?.totalCount ?? 0;
                         break;
 
                     case "GetOu":
                         request.TableName = "bas_ou";
-                        var ouResult = await _getBasicDataService.GetClassAsync<bas_ou>(request);
+                        var ouResult = await _getBasicDataService.GetBasicDataAsync<bas_ou>(request);
                         result = ouResult;
                         totalCount = ouResult?.totalCount ?? 0;
                         break;
 
                     case "GetPackage":
                         request.TableName = "bas_package";
-                        var packageResult = await _getBasicDataService.GetClassAsync<bas_package>(request);
+                        var packageResult = await _getBasicDataService.GetBasicDataAsync<bas_package>(request);
                         result = packageResult;
                         totalCount = packageResult?.totalCount ?? 0;
                         break;
 
                     case "GetPackageProduct":
                         request.TableName = "bas_packagt_product";
-                        var packageProductResult = await _getBasicDataService.GetClassAsync<bas_packagt_product>(request);
+                        var packageProductResult = await _getBasicDataService.GetBasicDataAsync<bas_packagt_product>(request);
                         result = packageProductResult;
                         totalCount = packageProductResult?.totalCount ?? 0;
                         break;
 
                     case "GetPara":
                         request.TableName = "bas_para";
-                        var paraResult = await _getBasicDataService.GetClassAsync<bas_para>(request);
+                        var paraResult = await _getBasicDataService.GetBasicDataAsync<bas_para>(request);
                         result = paraResult;
                         totalCount = paraResult?.totalCount ?? 0;
                         break;
 
                     case "GetPayment":
                         request.TableName = "bas_payment";
-                        var paymentResult = await _getBasicDataService.GetClassAsync<bas_payment>(request);
+                        var paymentResult = await _getBasicDataService.GetBasicDataAsync<bas_payment>(request);
                         result = paymentResult;
                         totalCount = paymentResult?.totalCount ?? 0;
                         break;
 
                     case "GetPaymentChannelApply":
                         request.TableName = "bas_payment_channelapply";
-                        var paymentChannelResult = await _getBasicDataService.GetClassAsync<bas_payment_channelapply>(request);
+                        var paymentChannelResult = await _getBasicDataService.GetBasicDataAsync<bas_payment_channelapply>(request);
                         result = paymentChannelResult;
                         totalCount = paymentChannelResult?.totalCount ?? 0;
                         break;
 
                     case "GetPaymentOuApply":
                         request.TableName = "bas_payment_ouapply";
-                        var paymentOuResult = await _getBasicDataService.GetClassAsync<bas_payment_ouapply>(request);
+                        var paymentOuResult = await _getBasicDataService.GetBasicDataAsync<bas_payment_ouapply>(request);
                         result = paymentOuResult;
                         totalCount = paymentOuResult?.totalCount ?? 0;
                         break;
 
                     case "GetProduct":
                         request.TableName = "bas_product";
-                        var productResult = await _getBasicDataService.GetClassAsync<bas_product>(request);
+                        var productResult = await _getBasicDataService.GetBasicDataAsync<bas_product>(request);
                         result = productResult;
                         totalCount = productResult?.totalCount ?? 0;
                         break;
 
                     case "GetProductSpecValue":
                         request.TableName = "bas_product_spec_value";
-                        var productSpecResult = await _getBasicDataService.GetClassAsync<bas_product_spec_value>(request);
+                        var productSpecResult = await _getBasicDataService.GetBasicDataAsync<bas_product_spec_value>(request);
                         result = productSpecResult;
                         totalCount = productSpecResult?.totalCount ?? 0;
                         break;
 
                     case "GetProperty":
                         request.TableName = "bas_property";
-                        var propertyResult = await _getBasicDataService.GetClassAsync<bas_property>(request);
+                        var propertyResult = await _getBasicDataService.GetBasicDataAsync<bas_property>(request);
                         result = propertyResult;
                         totalCount = propertyResult?.totalCount ?? 0;
                         break;
 
                     case "GetReturnReason":
                         request.TableName = "bas_return_reason";
-                        var returnReasonResult = await _getBasicDataService.GetClassAsync<bas_return_reason>(request);
+                        var returnReasonResult = await _getBasicDataService.GetBasicDataAsync<bas_return_reason>(request);
                         result = returnReasonResult;
                         totalCount = returnReasonResult?.totalCount ?? 0;
                         break;
 
                     case "GetShop":
                         request.TableName = "bas_shop";
-                        var shopResult = await _getBasicDataService.GetClassAsync<bas_shop>(request);
+                        var shopResult = await _getBasicDataService.GetBasicDataAsync<bas_shop>(request);
                         result = shopResult;
                         totalCount = shopResult?.totalCount ?? 0;
                         break;
 
                     case "GetShopBrand":
                         request.TableName = "bas_shop_brand";
-                        var shopBrandResult = await _getBasicDataService.GetClassAsync<bas_shop_brand>(request);
+                        var shopBrandResult = await _getBasicDataService.GetBasicDataAsync<bas_shop_brand>(request);
                         result = shopBrandResult;
                         totalCount = shopBrandResult?.totalCount ?? 0;
                         break;
 
                     case "GetShopProperty":
                         request.TableName = "bas_shop_property";
-                        var shopPropertyResult = await _getBasicDataService.GetClassAsync<bas_shop_property>(request);
+                        var shopPropertyResult = await _getBasicDataService.GetBasicDataAsync<bas_shop_property>(request);
                         result = shopPropertyResult;
                         totalCount = shopPropertyResult?.totalCount ?? 0;
                         break;
 
                     case "GetSku":
                         request.TableName = "bas_sku";
-                        var skuResult = await _getBasicDataService.GetClassAsync<bas_sku>(request);
+                        var skuResult = await _getBasicDataService.GetBasicDataAsync<bas_sku>(request);
                         result = skuResult;
                         totalCount = skuResult?.totalCount ?? 0;
                         break;
 
                     case "GetSkuSpecValue":
                         request.TableName = "bas_sku_spec_value";
-                        var skuSpecResult = await _getBasicDataService.GetClassAsync<bas_sku_spec_value>(request);
+                        var skuSpecResult = await _getBasicDataService.GetBasicDataAsync<bas_sku_spec_value>(request);
                         result = skuSpecResult;
                         totalCount = skuSpecResult?.totalCount ?? 0;
                         break;
 
                     case "GetSkuPrice":
                         request.TableName = "bas_skuPrice";
-                        var skuPriceResult = await _getBasicDataService.GetClassAsync<bas_skuPrice>(request);
+                        var skuPriceResult = await _getBasicDataService.GetBasicDataAsync<bas_skuPrice>(request);
                         result = skuPriceResult;
                         totalCount = skuPriceResult?.totalCount ?? 0;
                         break;
 
                     case "GetSkuVipPrice":
                         request.TableName = "bas_skuVIPPrice";
-                        var skuVipPriceResult = await _getBasicDataService.GetClassAsync<bas_skuVIPPrice>(request);
+                        var skuVipPriceResult = await _getBasicDataService.GetBasicDataAsync<bas_skuVIPPrice>(request);
                         result = skuVipPriceResult;
                         totalCount = skuVipPriceResult?.totalCount ?? 0;
                         break;
 
                     case "GetSpec":
                         request.TableName = "bas_spec";
-                        var specResult = await _getBasicDataService.GetClassAsync<bas_spec>(request);
+                        var specResult = await _getBasicDataService.GetBasicDataAsync<bas_spec>(request);
                         result = specResult;
                         totalCount = specResult?.totalCount ?? 0;
                         break;
 
                     case "GetSpecValue":
                         request.TableName = "bas_spec_value";
-                        var specValueResult = await _getBasicDataService.GetClassAsync<bas_spec_value>(request);
+                        var specValueResult = await _getBasicDataService.GetBasicDataAsync<bas_spec_value>(request);
                         result = specValueResult;
                         totalCount = specValueResult?.totalCount ?? 0;
                         break;
 
                     case "GetSpecGroup":
                         request.TableName = "bas_specgroup";
-                        var specGroupResult = await _getBasicDataService.GetClassAsync<bas_specgroup>(request);
+                        var specGroupResult = await _getBasicDataService.GetBasicDataAsync<bas_specgroup>(request);
                         result = specGroupResult;
                         totalCount = specGroupResult?.totalCount ?? 0;
                         break;
 
                     case "GetUniqueCode":
                         request.TableName = "bas_unique_code";
-                        var uniqueCodeResult = await _getBasicDataService.GetClassAsync<bas_unique_code>(request);
+                        var uniqueCodeResult = await _getBasicDataService.GetBasicDataAsync<bas_unique_code>(request);
                         result = uniqueCodeResult;
                         totalCount = uniqueCodeResult?.totalCount ?? 0;
                         break;
 
                     case "GetUser":
                         request.TableName = "scy_user";
-                        var userResult = await _getBasicDataService.GetClassAsync<scy_user>(request);
+                        var userResult = await _getBasicDataService.GetBasicDataAsync<scy_user>(request);
                         result = userResult;
                         totalCount = userResult?.totalCount ?? 0;
                         break;

@@ -18,11 +18,11 @@ namespace AvaloniaWebAPI.Service.Services
             _dbContext = dbContext;
         }
 
-        public async Task<PlatformBasicDataResult<T>> GetClassAsync<T>(PlatformBasicDataRequest request)
+        public async Task<PlatformBasicDataResult<T>> GetBasicDataAsync<T>(PlatformBasicDataRequest request)
         {
             try
             {
-                _logger.LogInformation($"查询类目数据，ModifyDTM: {(request.ModifyDTM == null ? "null" : request.ModifyDTM.Value.ToString("yyyy-MM-dd HH:mm:ss"))}");
+                _logger.LogInformation($"查询{request.DataMethod}数据，ModifyDTM: {(request.ModifyDTM == null ? "null" : request.ModifyDTM.Value.ToString("yyyy-MM-dd HH:mm:ss"))}");
 
                 var queryTime = DateTime.Now;
 
@@ -47,7 +47,7 @@ namespace AvaloniaWebAPI.Service.Services
 
                     var result = items.ToList();
 
-                    _logger.LogInformation($"查询类目数据完成，共 {result.Count} 条记录");
+                    _logger.LogInformation($"查询{request.DataMethod}数据完成，共 {result.Count} 条记录");
 
                     return new PlatformBasicDataResult<T>
                     {
