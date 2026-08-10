@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.79" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AvaloniaWebAPI.Core\AvaloniaWebAPI.Core.csproj" />
     <ProjectReference Include="..\AvaloniaWebAPI.Infrastructure\AvaloniaWebAPI.Infrastructure.csproj" />
   </ItemGroup>

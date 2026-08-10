@@ -15,6 +15,9 @@ namespace AvaloniaWebAPI.Core.Entities
         //public int Status { get; set; }
         //public int SkipCount { get; set; }
         //public int MaxResultCount { get; set; }
-        public DateTime? ModifyDTM { get; set; }
+        public DateTime? ModifyDTM { get; set; } 
+
+        public string? TableName { get; set; }
+        
     }
 }

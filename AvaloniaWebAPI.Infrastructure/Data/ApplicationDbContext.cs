@@ -25,6 +25,8 @@ namespace AvaloniaWebAPI.Infrastructure.Data
 
         public DbSet<bas_brand> BasBrands { get; set; }  // 添加这行
         public DbSet<bas_category> bas_categories { get; set; }
+        public DbSet<bas_class> bas_class { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

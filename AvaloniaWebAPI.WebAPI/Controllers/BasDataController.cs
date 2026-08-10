@@ -19,8 +19,11 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
         private readonly ILogger<BasDataController> _logger;
         private readonly IBasBrandService _basBrandService;
         private readonly IBasCategoryService _basCategoryService;
+        private readonly IGetBasicDataService _getBasicDataService;
         public BasDataController(IUserService userService, IMaterialService materialService, ILogger<BasDataController> logger, ISalPromotionService salPromotionService, IBasBrandService basBrandService,
-            IBasCategoryService basCategoryService)
+            IBasCategoryService basCategoryService,
+            IGetBasicDataService getBasicDataService
+            )
         {
             _userService = userService;
             _materialService = materialService;
@@ -28,9 +31,10 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
             _salPromotionService = salPromotionService;
             _basBrandService = basBrandService;
             _basCategoryService = basCategoryService;
+            _getBasicDataService = getBasicDataService;
         }
 
-       
+
         /// <summary>
         /// 获取平台基础数据（品牌沟通）
         /// </summary>
@@ -53,10 +57,23 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = brandResult?.totalCount ?? 0;
                         break;
                     case "GetCategory":
-                        var categoryResult = await _basCategoryService.GetAllCategoriesAsync(request);
+                        //var categoryResult = await _basCategoryService.GetAllCategoriesAsync(request);
+                        request.TableName = "bas_category";
+                        var categoryResult =  await _getBasicDataService.GetClassAsync<bas_category>(request);
                         result = categoryResult;
                         totalCount = categoryResult?.totalCount ?? 0;
                         break;
+                    case "GetClass":
+                        request.TableName = "bas_class";
+                        var classResult = await _getBasicDataService.GetClassAsync<bas_class>(request);
+                        result = classResult;
+                        totalCount = classResult?.totalCount ?? 0;
+                        break;
+
+
+
+
+
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);
                         return Ok(new PlatformBasicDataResponse<object>
