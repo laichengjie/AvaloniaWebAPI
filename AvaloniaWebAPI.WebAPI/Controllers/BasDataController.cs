@@ -53,7 +53,9 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                 {
                     // ===== 基础资料 =====
                     case "GetBrand":
-                        var brandResult = await _basBrandService.GetBrandsAsync(request);
+                        //var brandResult = await _basBrandService.GetBrandsAsync(request);
+                        request.TableName = "bas_brand";
+                        var brandResult = await _getBasicDataService.GetBasicDataAsync<bas_brand>(request);
                         result = brandResult;
                         totalCount = brandResult?.totalCount ?? 0;
                         break;
