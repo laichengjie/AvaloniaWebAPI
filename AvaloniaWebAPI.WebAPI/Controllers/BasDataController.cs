@@ -290,6 +290,15 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         result = userResult;
                         totalCount = userResult?.totalCount ?? 0;
                         break;
+
+                    case "GetParaConfig":
+                        request.TableName = "bas_para";
+                        var paraConfigResult = await _getBasicDataService.GetBasicDataAsync<bas_para_config>(request);
+                        result = paraConfigResult;
+                        totalCount = paraConfigResult?.totalCount ?? 0;
+                        break;
+
+
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);
                         return Ok(new PlatformBasicDataResponse<object>

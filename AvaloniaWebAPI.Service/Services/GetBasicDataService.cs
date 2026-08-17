@@ -35,36 +35,48 @@ namespace AvaloniaWebAPI.Service.Services
                     await connection.OpenAsync();
 
                     // 构建 SQL
-                    string sql = $"SELECT * FROM {tableName} WHERE 1=1";
-
-                    if (request.ModifyDTM != null)
+                    string sql = "";
+                    if (request.DataMethod == "GetParaConfig")
                     {
-                        sql += " AND modified_time >= @ModifyDTM";
+                        sql = $"select a.id ,a.id as para_id, a.para_name,a.para_code,coalesce(b.para_value,a.para_value) as para_value,coalesce(b.show_value,a.show_value) as show_value from bas_para a  Left join bas_para_config b on a.id=b.para_id and b.group_id=3 and b.ou_id=9 and  b.shop_id=4953 and b.is_deleted=0 where a.para_type_id=3 and a.is_deleted=0 union all select a.id , a.id as para_id,a.para_name,a.para_code,para_value,show_value  from bas_para a  where a.is_deleted=0  and  a.para_code in(\"DS0021\",\"SD0050\",\"SD0090\",\"SC0002\",\"SD0075\",\"SD0073\",\"SD0072\",\"SD0070\",\"SD0071\",\"SD0041\",\"Sys0027\" ,\"SD0069\",\"SD0060\",\"Sys0001\",\"Sys0004\",\"Member004\",\"FP0002\",\"SD0093\",\"SD0094\",\"SD0095\",\"SD0096\" ,\"SD0101\",\"SD0103\",\"SD0106\",\"SD0110\",\"SD0045\",\"SD0126\",\"SD0128\",\"KC0022\",\"KC0042\",\"SD0132\",\"SD0136\" ,\"Sys0085\",\"EI0001\",\"SD0012\",\"SD0141\",\"Sys0011\",\"SD0157\",\"SD0158\",\"SD0161\",\"SD0164\",\"DS0007\" ,\"SD0163\",\"SD0175\",\"SD0173\",\"SD0177\",\"SD0176\",\"SD0178\",\"Member032\",\"SD0180\",\"EI0003\",\"EI0005\" ,\"SD0179\",\"EI0007\",\"Sys0082\",\"SD0182\",\"Sys0002\",\"SD0183\",\"Sys0097\",\"SD0185\",\"Sys0091\",\"SD0186\" ,\"SD0201\",\"SYS095\",\"SD0192\",\"Sys0025\" ,\"SD0150\",\"SD0193\",\"Sys0107\",\"SD0195\",\" SD0203\",\"SD0196\",\"SD0208\" ,\"SD0211\",\"Guide015\",\"Guide0151\",\"SD0190\",\"Msg0001\", \"Msg0002\", \"DS0021\", \"Sys0060\")";
                     }
-
-                    // 检查并添加 group_id 条件
-                    if (await ColumnExistsAsync(connection, tableName, "group_id"))
+                    else
                     {
-                        sql += " AND group_id = 3";
-                    }
+                        sql = $"SELECT * FROM {tableName} WHERE 1=1";
 
-                    // 检查并添加 ou_id 条件
-                    if (await ColumnExistsAsync(connection, tableName, "ou_id"))
-                    {
-                        sql += " AND ou_id = 9";
-                    }
 
-                    // 检查并添加 shop_id 条件
-                    if (await ColumnExistsAsync(connection, tableName, "shop_id"))
-                    {
-                        sql += " AND shop_id = 4953";
-                    }
-                    else if (await ColumnExistsAsync(connection, tableName, "shopId"))
-                    {
-                        sql += " AND shopId = 4953";
-                    }
 
-                    sql += " ORDER BY modified_time DESC";
+
+
+                        if (request.ModifyDTM != null)
+                        {
+                            sql += " AND modified_time >= @ModifyDTM";
+                        }
+
+                        // 检查并添加 group_id 条件
+                        if (await ColumnExistsAsync(connection, tableName, "group_id"))
+                        {
+                            sql += " AND group_id = 3";
+                        }
+
+                        // 检查并添加 ou_id 条件
+                        if (await ColumnExistsAsync(connection, tableName, "ou_id"))
+                        {
+                            sql += " AND ou_id = 9";
+                        }
+
+                        // 检查并添加 shop_id 条件
+                        if (await ColumnExistsAsync(connection, tableName, "shop_id"))
+                        {
+                            sql += " AND shop_id = 4953";
+                        }
+                        else if (await ColumnExistsAsync(connection, tableName, "shopId"))
+                        {
+                            sql += " AND shopId = 4953";
+                        }
+
+                        sql += " ORDER BY modified_time DESC";
+                    }
 
                     var items = await connection.QueryAsync<T>(sql, new
                     {
