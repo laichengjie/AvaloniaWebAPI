@@ -47,11 +47,7 @@ namespace AvaloniaWebAPI.Service.Services
                     {
                         sql = $"SELECT * FROM {tableName} WHERE 1=1";
 
-
-
-
-
-                        if (request.ModifyDTM != null)
+                        if (await ColumnExistsAsync(connection, tableName, "modified_time"))
                         {
                             sql += " AND modified_time >= @ModifyDTM";
                         }
@@ -78,7 +74,7 @@ namespace AvaloniaWebAPI.Service.Services
                             sql += " AND shopId = 4953";
                         }
 
-                        sql += " ORDER BY modified_time DESC";
+                        //sql += " ORDER BY modified_time DESC";
                     }
 
                     var items = await connection.QueryAsync<T>(sql, new
