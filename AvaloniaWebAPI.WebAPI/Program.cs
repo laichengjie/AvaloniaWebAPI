@@ -6,7 +6,7 @@ using AvaloniaWebAPI.Infrastructure.Repositories;
 using AvaloniaWebAPI.Service.Services;
 using System.IO.Compression;
 using System.Linq;
-using MySqlConnector; // 如果使用 Pomelo，这个会自动引用
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,16 +65,17 @@ builder.Services.AddCors(options =>
 // 统一端口配置
 builder.WebHost.UseUrls("http://localhost:5000", "http://*:5000");
 
-// ========== 数据库配置（支持 SQL Server 和 MySQL 切换） ==========
+// ========== 数据库配置 ==========
 var dbType = builder.Configuration["Database:Type"] ?? "SqlServer";
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var SDConnectionString = builder.Configuration.GetConnectionString("SDConnection");
 
+// 注册主数据库 ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     switch (dbType.ToLower())
     {
         case "mysql":
-            // 使用 MySQL
             options.UseMySql(connectionString,
                 new MySqlServerVersion(new Version(8, 0, 0)),
                 sqlOptions =>
@@ -84,17 +85,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                     sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     sqlOptions.MaxBatchSize(100);
                 });
-            Console.WriteLine("✅ 使用 MySQL 数据库");
+            Console.WriteLine("✅ 使用 MySQL 数据库 (主库)");
             break;
 
-        //case "sqlite":
-        //    // 使用 SQLite
-        //    options.UseSqlite(connectionString);
-        //    Console.WriteLine("✅ 使用 SQLite 数据库");
-        //    break;
-
         default:
-            // 默认使用 SQL Server
             options.UseSqlServer(connectionString, sqlOptions =>
             {
                 sqlOptions.CommandTimeout(600);
@@ -102,7 +96,44 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 sqlOptions.MaxBatchSize(100);
             });
-            Console.WriteLine("✅ 使用 SQL Server 数据库");
+            Console.WriteLine("✅ 使用 SQL Server 数据库 (主库)");
+            break;
+    }
+
+    if (builder.Environment.IsDevelopment())
+    {
+        options.EnableSensitiveDataLogging();
+        options.EnableDetailedErrors();
+    }
+});
+
+// ========== 注册 ERP 数据库 ==========
+builder.Services.AddDbContext<SDDbContext>(options =>
+{
+    switch (dbType.ToLower())
+    {
+        case "mysql":
+            options.UseMySql(SDConnectionString,
+                new MySqlServerVersion(new Version(8, 0, 0)),
+                sqlOptions =>
+                {
+                    sqlOptions.CommandTimeout(600);
+                    sqlOptions.EnableRetryOnFailure(5);
+                    sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                    sqlOptions.MaxBatchSize(100);
+                });
+            Console.WriteLine("✅ 使用 MySQL 数据库 (ERP库)");
+            break;
+
+        default:
+            options.UseSqlServer(SDConnectionString, sqlOptions =>
+            {
+                sqlOptions.CommandTimeout(600);
+                sqlOptions.EnableRetryOnFailure(5);
+                sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                sqlOptions.MaxBatchSize(100);
+            });
+            Console.WriteLine("✅ 使用 SQL Server 数据库 (ERP库)");
             break;
     }
 
@@ -164,8 +195,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    // 注释掉 HTTPS 重定向
-    // app.UseHttpsRedirection();
 }
 
 app.UseCors("AllowAll");

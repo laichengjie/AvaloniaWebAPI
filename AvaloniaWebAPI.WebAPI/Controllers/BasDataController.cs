@@ -298,6 +298,20 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = paraConfigResult?.totalCount ?? 0;
                         break;
 
+                    case "GetYgouDiscount":
+                        request.TableName = "sd_ygou_discount";
+                        var ygouDiscountResult = await _getBasicDataService.GetBasicDataAsync<sd_ygou_discount>(request);
+                        result = ygouDiscountResult;
+                        totalCount = ygouDiscountResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetYgouDiscountRole":
+                        request.TableName = "sd_ygou_discount_role";
+                        var ygouDiscountRoleResult = await _getBasicDataService.GetBasicDataAsync<sd_ygou_discount_role>(request);
+                        result = ygouDiscountRoleResult;
+                        totalCount = ygouDiscountRoleResult?.totalCount ?? 0;
+                        break;
+
 
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);

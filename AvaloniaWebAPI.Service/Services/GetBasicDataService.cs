@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using System.Data.Common;
 
 namespace AvaloniaWebAPI.Service.Services
 {
@@ -13,11 +14,13 @@ namespace AvaloniaWebAPI.Service.Services
     {
         private readonly ILogger<GetBasicDataService> _logger;
         private readonly ApplicationDbContext _dbContext;
+        private readonly SDDbContext _sdDbContext; 
 
-        public GetBasicDataService( ILogger<GetBasicDataService> logger, ApplicationDbContext dbContext)
+        public GetBasicDataService( ILogger<GetBasicDataService> logger, ApplicationDbContext dbContext, SDDbContext sdDbContext) 
         {
             _logger = logger;
             _dbContext = dbContext;
+            _sdDbContext = sdDbContext;
         }
 
         public async Task<PlatformBasicDataResult<T>> GetBasicDataAsync<T>(PlatformBasicDataRequest request)
@@ -30,7 +33,7 @@ namespace AvaloniaWebAPI.Service.Services
                 var tableName = request.TableName;
 
                 // 使用同一个连接
-                using (var connection = _dbContext.Database.GetDbConnection())
+                using (var connection = GetConnection(request.DataMethod))
                 {
                     await connection.OpenAsync();
 
@@ -99,6 +102,22 @@ namespace AvaloniaWebAPI.Service.Services
             {
                 _logger.LogError(ex, $"查询数据失败 ： {ex.Message} ModifyDTM: {request.ModifyDTM?.ToString("yyyy-MM-dd HH:mm:ss") ?? "null"}");
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// 根据 DataMethod 获取对应的数据库连接
+        /// </summary>
+       
+        private DbConnection GetConnection(string dataMethod)
+        {
+            switch (dataMethod)
+            {
+                case "GetYgouDiscount":
+                case "GetYgouDiscountRole":
+                    return _sdDbContext.Database.GetDbConnection();
+                default:
+                    return _dbContext.Database.GetDbConnection();
             }
         }
 
