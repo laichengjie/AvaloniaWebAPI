@@ -179,11 +179,18 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = productResult?.totalCount ?? 0;
                         break;
 
-                    case "GetProductSpecValue":
-                        request.TableName = "bas_product_spec_value";
-                        var productSpecResult = await _getBasicDataService.GetBasicDataAsync<bas_product_spec_value>(request);
+                    case "GetProductSpec":
+                        request.TableName = "bas_product_spec";
+                        var productSpecResult = await _getBasicDataService.GetBasicDataAsync<bas_product_spec>(request);
                         result = productSpecResult;
                         totalCount = productSpecResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetProductSpecValue":
+                        request.TableName = "bas_product_spec_value";
+                        var productSpecValueResult = await _getBasicDataService.GetBasicDataAsync<bas_product_spec_value>(request);
+                        result = productSpecValueResult;
+                        totalCount = productSpecValueResult?.totalCount ?? 0;
                         break;
 
                     case "GetProperty":
