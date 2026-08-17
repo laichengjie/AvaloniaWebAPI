@@ -1,4 +1,5 @@
 ﻿using AvaloniaWebAPI.Core.Entities;
+using AvaloniaWebAPI.Core.Entities.AvaloniaWebAPI.Core.Entities;
 using AvaloniaWebAPI.Core.Interfaces;
 using AvaloniaWebAPI.Service.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -74,6 +75,19 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = classResult?.totalCount ?? 0;
                         break;
 
+                    case "GetCounter":
+                        request.TableName = "bas_counter";
+                        var counterResult = await _getBasicDataService.GetBasicDataAsync<bas_counter>(request);
+                        result = counterResult;
+                        totalCount = counterResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetCounterPrint":
+                        request.TableName = "bas_counter_print";
+                        var counterPrintResult = await _getBasicDataService.GetBasicDataAsync<bas_counter_print>(request);
+                        result = counterPrintResult;
+                        totalCount = counterPrintResult?.totalCount ?? 0;
+                        break;
                     case "GetCurrency":
                         request.TableName = "bas_currency";
                         var currencyResult = await _getBasicDataService.GetBasicDataAsync<bas_currency>(request);
