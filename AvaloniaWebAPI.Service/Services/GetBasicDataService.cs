@@ -59,7 +59,7 @@ namespace AvaloniaWebAPI.Service.Services
                         }
 
                         // 检查并添加 ou_id 条件
-                        if (await ColumnExistsAsync(connection, tableName, "ou_id"))
+                        if (await ColumnExistsAsync(connection, tableName, "ou_id") && request.DataMethod != "GetSku")
                         {
                             sql += " AND ou_id = 9";
                         }
