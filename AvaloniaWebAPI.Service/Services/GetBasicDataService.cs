@@ -53,7 +53,7 @@ namespace AvaloniaWebAPI.Service.Services
                         }
 
                         // 检查并添加 group_id 条件
-                        if (await ColumnExistsAsync(connection, tableName, "group_id"))
+                        if (await ColumnExistsAsync(connection, tableName, "group_id") && request.DataMethod != "GetDictItem")
                         {
                             sql += " AND group_id = 3";
                         }
