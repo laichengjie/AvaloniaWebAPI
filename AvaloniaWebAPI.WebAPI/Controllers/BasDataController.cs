@@ -326,6 +326,19 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = ygouDiscountRoleResult?.totalCount ?? 0;
                         break;
 
+                    case "GetOpArea":
+                        request.TableName = "bas_op_area";
+                        var opAreaResult = await _getBasicDataService.GetBasicDataAsync<bas_op_area>(request);
+                        result = opAreaResult;
+                        totalCount = opAreaResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetBundleAct":
+                        request.TableName = "mc_bundle_act";
+                        var bundleActResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act>(request);
+                        result = bundleActResult;
+                        totalCount = bundleActResult?.totalCount ?? 0;
+                        break;
 
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);

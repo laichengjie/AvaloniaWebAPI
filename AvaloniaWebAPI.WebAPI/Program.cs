@@ -69,9 +69,10 @@ builder.WebHost.UseUrls("http://localhost:5000", "http://*:5000");
 var dbType = builder.Configuration["Database:Type"] ?? "SqlServer";
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var SDConnectionString = builder.Configuration.GetConnectionString("SDConnection");
+var MCConnectionString = builder.Configuration.GetConnectionString("MCConnection");
 
 // 注册主数据库 ApplicationDbContext
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
 {
     switch (dbType.ToLower())
     {
@@ -114,6 +115,42 @@ builder.Services.AddDbContext<SDDbContext>(options =>
     {
         case "mysql":
             options.UseMySql(SDConnectionString,
+                new MySqlServerVersion(new Version(8, 0, 0)),
+                sqlOptions =>
+                {
+                    sqlOptions.CommandTimeout(600);
+                    sqlOptions.EnableRetryOnFailure(5);
+                    sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                    sqlOptions.MaxBatchSize(100);
+                });
+            Console.WriteLine("✅ 使用 MySQL 数据库 (ERP库)");
+            break;
+
+        default:
+            options.UseSqlServer(SDConnectionString, sqlOptions =>
+            {
+                sqlOptions.CommandTimeout(600);
+                sqlOptions.EnableRetryOnFailure(5);
+                sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                sqlOptions.MaxBatchSize(100);
+            });
+            Console.WriteLine("✅ 使用 SQL Server 数据库 (ERP库)");
+            break;
+    }
+
+    if (builder.Environment.IsDevelopment())
+    {
+        options.EnableSensitiveDataLogging();
+        options.EnableDetailedErrors();
+    }
+});
+// ========== 注册 MC 数据库 ==========
+builder.Services.AddDbContext<MCDbContext>(options =>
+{
+    switch (dbType.ToLower())
+    {
+        case "mysql": 
+            options.UseMySql(MCConnectionString,
                 new MySqlServerVersion(new Version(8, 0, 0)),
                 sqlOptions =>
                 {

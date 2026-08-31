@@ -149,6 +149,12 @@ namespace AvaloniaWebAPI.Core.Entities
         public DateTime? effective_end { get; set; }
 
         /// <summary>
+        /// 删除标记（0未删除，1已删除）
+        /// </summary>
+        [Column("is_deleted")]
+        public int is_deleted { get; set; }
+
+        /// <summary>
         /// 创建人
         /// </summary>
         [Column("created_by")]

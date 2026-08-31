@@ -14,13 +14,15 @@ namespace AvaloniaWebAPI.Service.Services
     {
         private readonly ILogger<GetBasicDataService> _logger;
         private readonly ApplicationDbContext _dbContext;
-        private readonly SDDbContext _sdDbContext; 
+        private readonly SDDbContext _sdDbContext;
+        private readonly MCDbContext _mcDbContext;
 
-        public GetBasicDataService( ILogger<GetBasicDataService> logger, ApplicationDbContext dbContext, SDDbContext sdDbContext) 
+        public GetBasicDataService( ILogger<GetBasicDataService> logger, ApplicationDbContext dbContext, SDDbContext sdDbContext, MCDbContext mcDbContext) 
         {
             _logger = logger;
             _dbContext = dbContext;
             _sdDbContext = sdDbContext;
+            _mcDbContext = mcDbContext;
         }
 
         public async Task<PlatformBasicDataResult<T>> GetBasicDataAsync<T>(PlatformBasicDataRequest request)
@@ -67,11 +69,11 @@ namespace AvaloniaWebAPI.Service.Services
                         // 检查并添加 shop_id 条件
                         if (await ColumnExistsAsync(connection, tableName, "shop_id"))
                         {
-                            sql += " AND shop_id = 4953";
+                            sql += " AND shop_id = 21023";
                         }
                         else if (await ColumnExistsAsync(connection, tableName, "shopId"))
                         {
-                            sql += " AND shopId = 4953";
+                            sql += " AND shopId = 21023";
                         }
 
                         //sql += " ORDER BY modified_time DESC";
@@ -112,6 +114,8 @@ namespace AvaloniaWebAPI.Service.Services
                 case "GetYgouDiscount":
                 case "GetYgouDiscountRole":
                     return _sdDbContext.Database.GetDbConnection();
+                case "GetBundleAct":
+                    return _mcDbContext.Database.GetDbConnection();
                 default:
                     return _dbContext.Database.GetDbConnection();
             }
