@@ -114,12 +114,63 @@ namespace AvaloniaWebAPI.Service.Services
                 case "GetYgouDiscount":
                 case "GetYgouDiscountRole":
                     return _sdDbContext.Database.GetDbConnection();
+                // ===== MC 数据库（捆绑促销活动） =====
                 case "GetBundleAct":
+                case "GetBundleActCoupon":
+                case "GetBundleActDiscount":
+                case "GetBundleActExch":
+                case "GetBundleActExchProduct":
+                case "GetBundleActGradedPromoPgroup":
+                case "GetBundleActGradedPromo":
+                case "GetBundleActArea":
+                case "GetBundleActMember":
+                case "GetBundleActMemberGrade":
+                case "GetBundleActPgroup":
+                case "GetBundleActPresentValue":
+                case "GetBundleActProduct":
+                case "GetBundleActRepeat":
+                case "GetBundleActShop":
+                // ===== MC 数据库（通用活动） =====
+                case "GetGeneralAct":
+                case "GetGeneralActArea":
+                case "GetGeneralActCoupon":
+                case "GetGeneralActExch":
+                case "GetGeneralActExchPgroup":
+                case "GetGeneralActExchProduct":
+                case "GetGeneralActMember":
+                case "GetGeneralActMemberGrade":
+                case "GetGeneralActProduct":
+                case "GetGeneralActRepeat":
+                case "GetGeneralActShop":
+                // ===== MC 数据库（联赠促销活动） =====
+                case "GetJointGiftAct":
+                case "GetJointGiftActCoupon":
+                case "GetJointGiftActMember":
+                case "GetJointGiftActShopArea":
+                case "GetJointGiftActMemberGrade":
+                case "GetJointGiftActRepeat":
+                case "GetJointGiftActShop":
+                // ===== MC 数据库（整单促销活动） =====
+                case "GetWholeAct":
+                case "GetWholeActArea":
+                case "GetWholeActConfig":
+                case "GetWholeActConfigExchProduct":
+                case "GetWholeActConfigPgroup":
+                case "GetWholeActCoupon":
+                case "GetWholeActDiscount":
+                case "GetWholeActExch":
+                case "GetWholeActMember":
+                case "GetWholeActMemberGrade":
+                case "GetWholeActPgroup":
+                case "GetWholeActProduct":
+                case "GetWholeActRepeat":
+                case "GetWholeActShop":
                     return _mcDbContext.Database.GetDbConnection();
                 default:
                     return _dbContext.Database.GetDbConnection();
             }
         }
+
 
         /// <summary>
         /// 检查表中是否存在指定字段（使用已打开的连接）

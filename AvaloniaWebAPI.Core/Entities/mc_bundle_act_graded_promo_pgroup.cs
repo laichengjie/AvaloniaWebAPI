@@ -1,0 +1,43 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AvaloniaWebAPI.Core.Entities
+{
+    /// <summary>
+    /// 捆绑促销活动-分级促销-商品组
+    /// </summary>
+    [Table("mc_bundle_act_graded_promo_pgroup")]
+    public class mc_bundle_act_graded_promo_pgroup
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
+        [Column("group_id")]
+        public int group_id { get; set; }
+
+        [Column("activity_id")]
+        public int activity_id { get; set; }
+
+        [Column("graded_promo_id")]
+        public int graded_promo_id { get; set; }
+
+        [Column("pgroup_id")]
+        public int pgroup_id { get; set; }
+
+        [Column("is_deleted")]
+        public int is_deleted { get; set; }
+
+        [Column("deleted_by")]
+        public string deleted_by { get; set; } = string.Empty;
+
+        [Column("deleted_time")]
+        public DateTime deleted_time { get; set; } = new DateTime(3000, 12, 31);
+
+        [Column("min_buy_qty")]
+        public int min_buy_qty { get; set; }
+
+        [Column("discount_factor")]
+        public decimal discount_factor { get; set; }
+    }
+}

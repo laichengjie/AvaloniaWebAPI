@@ -333,12 +333,297 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = opAreaResult?.totalCount ?? 0;
                         break;
 
+                    // ===== 捆绑促销活动 =====
                     case "GetBundleAct":
                         request.TableName = "mc_bundle_act";
                         var bundleActResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act>(request);
                         result = bundleActResult;
                         totalCount = bundleActResult?.totalCount ?? 0;
                         break;
+                    case "GetBundleActCoupon":
+                        request.TableName = "mc_bundle_act_coupon";
+                        var bundleActCouponResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_coupon>(request);
+                        result = bundleActCouponResult;
+                        totalCount = bundleActCouponResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActDiscount":
+                        request.TableName = "mc_bundle_act_discount";
+                        var bundleActDiscountResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_discount>(request);
+                        result = bundleActDiscountResult;
+                        totalCount = bundleActDiscountResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActExch":
+                        request.TableName = "mc_bundle_act_exch";
+                        var bundleActExchResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_exch>(request);
+                        result = bundleActExchResult;
+                        totalCount = bundleActExchResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActExchProduct":
+                        request.TableName = "mc_bundle_act_exch_product";
+                        var bundleActExchProductResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_exch_product>(request);
+                        result = bundleActExchProductResult;
+                        totalCount = bundleActExchProductResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActGradedPromoPgroup":
+                        request.TableName = "mc_bundle_act_graded_promo_pgroup";
+                        var bundleActGradedPromoPgroupResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_graded_promo_pgroup>(request);
+                        result = bundleActGradedPromoPgroupResult;
+                        totalCount = bundleActGradedPromoPgroupResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActGradedPromo":
+                        request.TableName = "mc_bundle_act_graded_promo";
+                        var bundleActGradedPromoResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_graded_promo>(request);
+                        result = bundleActGradedPromoResult;
+                        totalCount = bundleActGradedPromoResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActArea":
+                        request.TableName = "mc_bundle_act_area";
+                        var bundleActAreaResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_area>(request);
+                        result = bundleActAreaResult;
+                        totalCount = bundleActAreaResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActMember":
+                        request.TableName = "mc_bundle_act_member";
+                        var bundleActMemberResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_member>(request);
+                        result = bundleActMemberResult;
+                        totalCount = bundleActMemberResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActMemberGrade":
+                        request.TableName = "mc_bundle_act_member_grade";
+                        var bundleActMemberGradeResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_member_grade>(request);
+                        result = bundleActMemberGradeResult;
+                        totalCount = bundleActMemberGradeResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActPgroup":
+                        request.TableName = "mc_bundle_act_pgroup";
+                        var bundleActPgroupResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_pgroup>(request);
+                        result = bundleActPgroupResult;
+                        totalCount = bundleActPgroupResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActPresentValue":
+                        request.TableName = "mc_bundle_act_present_value";
+                        var bundleActPresentValueResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_present_value>(request);
+                        result = bundleActPresentValueResult;
+                        totalCount = bundleActPresentValueResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActProduct":
+                        request.TableName = "mc_bundle_act_product";
+                        var bundleActProductResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_product>(request);
+                        result = bundleActProductResult;
+                        totalCount = bundleActProductResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActRepeat":
+                        request.TableName = "mc_bundle_act_repeat";
+                        var bundleActRepeatResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_repeat>(request);
+                        result = bundleActRepeatResult;
+                        totalCount = bundleActRepeatResult?.totalCount ?? 0;
+                        break;
+                    case "GetBundleActShop":
+                        request.TableName = "mc_bundle_act_shop";
+                        var bundleActShopResult = await _getBasicDataService.GetBasicDataAsync<mc_bundle_act_shop>(request);
+                        result = bundleActShopResult;
+                        totalCount = bundleActShopResult?.totalCount ?? 0;
+                        break;
+
+                    // ===== 通用活动 =====
+                    case "GetGeneralAct":
+                        request.TableName = "mc_general_act";
+                        var generalActResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act>(request);
+                        result = generalActResult;
+                        totalCount = generalActResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActArea":
+                        request.TableName = "mc_general_act_area";
+                        var generalActAreaResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_area>(request);
+                        result = generalActAreaResult;
+                        totalCount = generalActAreaResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActCoupon":
+                        request.TableName = "mc_general_act_coupon";
+                        var generalActCouponResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_coupon>(request);
+                        result = generalActCouponResult;
+                        totalCount = generalActCouponResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActExch":
+                        request.TableName = "mc_general_act_exch";
+                        var generalActExchResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_exch>(request);
+                        result = generalActExchResult;
+                        totalCount = generalActExchResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActExchPgroup":
+                        request.TableName = "mc_general_act_exch_pgroup";
+                        var generalActExchPgroupResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_exch_pgroup>(request);
+                        result = generalActExchPgroupResult;
+                        totalCount = generalActExchPgroupResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActExchProduct":
+                        request.TableName = "mc_general_act_exch_product";
+                        var generalActExchProductResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_exch_product>(request);
+                        result = generalActExchProductResult;
+                        totalCount = generalActExchProductResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActMember":
+                        request.TableName = "mc_general_act_member";
+                        var generalActMemberResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_member>(request);
+                        result = generalActMemberResult;
+                        totalCount = generalActMemberResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActMemberGrade":
+                        request.TableName = "mc_general_act_member_grade";
+                        var generalActMemberGradeResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_member_grade>(request);
+                        result = generalActMemberGradeResult;
+                        totalCount = generalActMemberGradeResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActProduct":
+                        request.TableName = "mc_general_act_product";
+                        var generalActProductResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_product>(request);
+                        result = generalActProductResult;
+                        totalCount = generalActProductResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActRepeat":
+                        request.TableName = "mc_general_act_repeat";
+                        var generalActRepeatResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_repeat>(request);
+                        result = generalActRepeatResult;
+                        totalCount = generalActRepeatResult?.totalCount ?? 0;
+                        break;
+                    case "GetGeneralActShop":
+                        request.TableName = "mc_general_act_shop";
+                        var generalActShopResult = await _getBasicDataService.GetBasicDataAsync<mc_general_act_shop>(request);
+                        result = generalActShopResult;
+                        totalCount = generalActShopResult?.totalCount ?? 0;
+                        break;
+
+                    // ===== 联赠促销活动 =====
+                    case "GetJointGiftAct":
+                        request.TableName = "mc_joint_gift_act";
+                        var jointGiftActResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act>(request);
+                        result = jointGiftActResult;
+                        totalCount = jointGiftActResult?.totalCount ?? 0;
+                        break;
+                    case "GetJointGiftActCoupon":
+                        request.TableName = "mc_joint_gift_act_coupon";
+                        var jointGiftActCouponResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act_coupon>(request);
+                        result = jointGiftActCouponResult;
+                        totalCount = jointGiftActCouponResult?.totalCount ?? 0;
+                        break;
+                    case "GetJointGiftActMember":
+                        request.TableName = "mc_joint_gift_act_member";
+                        var jointGiftActMemberResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act_member>(request);
+                        result = jointGiftActMemberResult;
+                        totalCount = jointGiftActMemberResult?.totalCount ?? 0;
+                        break;
+                    case "GetJointGiftActShopArea":
+                        request.TableName = "mc_joint_gift_act_shop_area";
+                        var jointGiftActShopAreaResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act_shop_area>(request);
+                        result = jointGiftActShopAreaResult;
+                        totalCount = jointGiftActShopAreaResult?.totalCount ?? 0;
+                        break;
+                    case "GetJointGiftActMemberGrade":
+                        request.TableName = "mc_joint_gift_act_member_grade";
+                        var jointGiftActMemberGradeResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act_member_grade>(request);
+                        result = jointGiftActMemberGradeResult;
+                        totalCount = jointGiftActMemberGradeResult?.totalCount ?? 0;
+                        break;
+                    case "GetJointGiftActRepeat":
+                        request.TableName = "mc_joint_gift_act_repeat";
+                        var jointGiftActRepeatResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act_repeat>(request);
+                        result = jointGiftActRepeatResult;
+                        totalCount = jointGiftActRepeatResult?.totalCount ?? 0;
+                        break;
+                    case "GetJointGiftActShop":
+                        request.TableName = "mc_joint_gift_act_shop";
+                        var jointGiftActShopResult = await _getBasicDataService.GetBasicDataAsync<mc_joint_gift_act_shop>(request);
+                        result = jointGiftActShopResult;
+                        totalCount = jointGiftActShopResult?.totalCount ?? 0;
+                        break;
+
+                    // ===== 整单促销活动 =====
+                    case "GetWholeAct":
+                        request.TableName = "mc_whole_act";
+                        var wholeActResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act>(request);
+                        result = wholeActResult;
+                        totalCount = wholeActResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActArea":
+                        request.TableName = "mc_whole_act_area";
+                        var wholeActAreaResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_area>(request);
+                        result = wholeActAreaResult;
+                        totalCount = wholeActAreaResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActConfig":
+                        request.TableName = "mc_whole_act_config";
+                        var wholeActConfigResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_config>(request);
+                        result = wholeActConfigResult;
+                        totalCount = wholeActConfigResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActConfigExchProduct":
+                        request.TableName = "mc_whole_act_config_exchproduct";
+                        var wholeActConfigExchProductResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_config_exchproduct>(request);
+                        result = wholeActConfigExchProductResult;
+                        totalCount = wholeActConfigExchProductResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActConfigPgroup":
+                        request.TableName = "mc_whole_act_config_pgroup";
+                        var wholeActConfigPgroupResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_config_pgroup>(request);
+                        result = wholeActConfigPgroupResult;
+                        totalCount = wholeActConfigPgroupResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActCoupon":
+                        request.TableName = "mc_whole_act_coupon";
+                        var wholeActCouponResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_coupon>(request);
+                        result = wholeActCouponResult;
+                        totalCount = wholeActCouponResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActDiscount":
+                        request.TableName = "mc_whole_act_discount";
+                        var wholeActDiscountResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_discount>(request);
+                        result = wholeActDiscountResult;
+                        totalCount = wholeActDiscountResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActExch":
+                        request.TableName = "mc_whole_act_exch";
+                        var wholeActExchResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_exch>(request);
+                        result = wholeActExchResult;
+                        totalCount = wholeActExchResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActMember":
+                        request.TableName = "mc_whole_act_member";
+                        var wholeActMemberResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_member>(request);
+                        result = wholeActMemberResult;
+                        totalCount = wholeActMemberResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActMemberGrade":
+                        request.TableName = "mc_whole_act_member_grade";
+                        var wholeActMemberGradeResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_member_grade>(request);
+                        result = wholeActMemberGradeResult;
+                        totalCount = wholeActMemberGradeResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActPgroup":
+                        request.TableName = "mc_whole_act_pgroup";
+                        var wholeActPgroupResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_pgroup>(request);
+                        result = wholeActPgroupResult;
+                        totalCount = wholeActPgroupResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActProduct":
+                        request.TableName = "mc_whole_act_product";
+                        var wholeActProductResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_product>(request);
+                        result = wholeActProductResult;
+                        totalCount = wholeActProductResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActRepeat":
+                        request.TableName = "mc_whole_act_repeat";
+                        var wholeActRepeatResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_repeat>(request);
+                        result = wholeActRepeatResult;
+                        totalCount = wholeActRepeatResult?.totalCount ?? 0;
+                        break;
+                    case "GetWholeActShop":
+                        request.TableName = "mc_whole_act_shop";
+                        var wholeActShopResult = await _getBasicDataService.GetBasicDataAsync<mc_whole_act_shop>(request);
+                        result = wholeActShopResult;
+                        totalCount = wholeActShopResult?.totalCount ?? 0;
+                        break;
+
+
 
                     default:
                         _logger.LogWarning("未知的DataMethod: {DataMethod}", request.DataMethod);

@@ -1,0 +1,49 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AvaloniaWebAPI.Core.Entities
+{
+    /// <summary>
+    /// 联赠促销活动-会员设置
+    /// </summary>
+    [Table("mc_joint_gift_act_member")]
+    public class mc_joint_gift_act_member
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
+        [Column("group_id")]
+        public int group_id { get; set; }
+
+        [Column("activity_id")]
+        public int activity_id { get; set; }
+
+        [Column("integral_deduction_enabled")]
+        public int integral_deduction_enabled { get; set; }
+
+        [Column("period_mode_id")]
+        public int period_mode_id { get; set; }
+
+        [Column("limit_times")]
+        public int limit_times { get; set; }
+
+        [Column("limit_qty")]
+        public int limit_qty { get; set; }
+
+        [Column("birthday_mode_id")]
+        public int birthday_mode_id { get; set; }
+
+        [Column("member_grade_enabled")]
+        public int member_grade_enabled { get; set; }
+
+        [Column("is_deleted")]
+        public int is_deleted { get; set; }
+
+        [Column("deleted_by")]
+        public string deleted_by { get; set; } = string.Empty;
+
+        [Column("deleted_time")]
+        public DateTime deleted_time { get; set; } = new DateTime(3000, 12, 31);
+    }
+}
