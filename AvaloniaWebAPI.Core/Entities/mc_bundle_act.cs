@@ -345,6 +345,12 @@ namespace AvaloniaWebAPI.Core.Entities
         /// </summary>
         [Column("is_notify_record")]
         public int is_notify_record { get; set; }
+
+        /// <summary>
+        /// 审核时间
+        /// </summary>
+        [Column("check_time")]
+        public DateTime check_time { get; set; } = DateTime.Now;
     }
 
 }

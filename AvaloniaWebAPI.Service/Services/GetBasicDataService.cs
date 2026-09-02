@@ -57,23 +57,37 @@ namespace AvaloniaWebAPI.Service.Services
                         // 检查并添加 group_id 条件
                         if (await ColumnExistsAsync(connection, tableName, "group_id") && request.DataMethod != "GetDictItem")
                         {
-                            sql += " AND group_id = 3";
+                            if (request.GroupID> 0)
+                            {
+                                sql += $" AND group_id = {request.GroupID}";
+                            }
                         }
 
                         // 检查并添加 ou_id 条件
                         if (await ColumnExistsAsync(connection, tableName, "ou_id") && request.DataMethod != "GetSku")
                         {
-                            sql += " AND ou_id = 9";
+                            if (request.OuID > 0)
+                            {
+                                sql += $" AND ou_id = {request.OuID}";
+                            }
+                        
                         }
 
                         // 检查并添加 shop_id 条件
                         if (await ColumnExistsAsync(connection, tableName, "shop_id"))
                         {
-                            sql += " AND shop_id = 21023";
+                            if (request.ShopID > 0)
+                            {
+                                sql += $" AND shop_id = {request.ShopID}";
+                            }
                         }
                         else if (await ColumnExistsAsync(connection, tableName, "shopId"))
                         {
-                            sql += " AND shopId = 21023";
+                            if (request.ShopID > 0)
+                            {
+                                sql += $" AND shopId = {request.ShopID}";
+                            }
+                           
                         }
 
                         //sql += " ORDER BY modified_time DESC";
