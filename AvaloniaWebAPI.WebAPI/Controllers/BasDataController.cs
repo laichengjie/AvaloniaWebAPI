@@ -623,6 +623,64 @@ namespace AvaloniaWebAPI.WebAPI.Controllers
                         totalCount = wholeActShopResult?.totalCount ?? 0;
                         break;
 
+                    // ===== 组合商品 =====
+                    case "GetCombine":
+                        request.TableName = "bas_combine";
+                        var combineResult = await _getBasicDataService.GetBasicDataAsync<bas_combine>(request);
+                        result = combineResult;
+                        totalCount = combineResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetCombineItem":
+                        request.TableName = "bas_combine_item";
+                        var combineItemResult = await _getBasicDataService.GetBasicDataAsync<bas_combine_item>(request);
+                        result = combineItemResult;
+                        totalCount = combineItemResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetCombineProperty":
+                        request.TableName = "bas_combine_property";
+                        var combinePropertyResult = await _getBasicDataService.GetBasicDataAsync<bas_combine_property>(request);
+                        result = combinePropertyResult;
+                        totalCount = combinePropertyResult?.totalCount ?? 0;
+                        break;
+
+                    // ===== 商品套餐范围 =====
+                    case "GetPackageArea":
+                        request.TableName = "bas_package_area";
+                        var packageAreaResult = await _getBasicDataService.GetBasicDataAsync<bas_package_area>(request);
+                        result = packageAreaResult;
+                        totalCount = packageAreaResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetPackageContact":
+                        request.TableName = "bas_package_contact";
+                        var packageContactResult = await _getBasicDataService.GetBasicDataAsync<bas_package_contact>(request);
+                        result = packageContactResult;
+                        totalCount = packageContactResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetPackageShop":
+                        request.TableName = "bas_package_shop";
+                        var packageShopResult = await _getBasicDataService.GetBasicDataAsync<bas_package_shop>(request);
+                        result = packageShopResult;
+                        totalCount = packageShopResult?.totalCount ?? 0;
+                        break;
+
+                    // ===== 商品套餐明细 =====
+                    case "GetPackagtPgroup":
+                        request.TableName = "bas_packagt_pgroup";
+                        var packagtPgroupResult = await _getBasicDataService.GetBasicDataAsync<bas_packagt_pgroup>(request);
+                        result = packagtPgroupResult;
+                        totalCount = packagtPgroupResult?.totalCount ?? 0;
+                        break;
+
+                    case "GetPackagtProduct":
+                        request.TableName = "bas_packagt_product";
+                        var packagtProductResult = await _getBasicDataService.GetBasicDataAsync<bas_packagt_product>(request);
+                        result = packagtProductResult;
+                        totalCount = packagtProductResult?.totalCount ?? 0;
+                        break;
 
 
                     default:

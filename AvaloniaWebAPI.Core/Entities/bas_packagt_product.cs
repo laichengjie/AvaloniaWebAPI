@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace AvaloniaWebAPI.Core.Entities
 {
     /// <summary>
-    /// 商品套餐-参与商品表
+    /// 商品套餐-参与商品
     /// </summary>
     [Table("bas_packagt_product")]
     public class bas_packagt_product
     {
         /// <summary>
-        /// ID（自增主键）
+        /// 主键
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -35,18 +35,6 @@ namespace AvaloniaWebAPI.Core.Entities
         public int pgroup_id { get; set; }
 
         /// <summary>
-        /// 商品组名称
-        /// </summary>
-        [Column("pgroup_name")]
-        public string pgroup_name { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 购买数量
-        /// </summary>
-        [Column("qty")]
-        public decimal qty { get; set; }
-
-        /// <summary>
         /// 商品ID
         /// </summary>
         [Column("product_id")]
@@ -69,5 +57,11 @@ namespace AvaloniaWebAPI.Core.Entities
         /// </summary>
         [Column("markup")]
         public decimal markup { get; set; }
+
+        /// <summary>
+        /// 删除标记（0未删除，1已删除）
+        /// </summary>
+        [Column("is_deleted")]
+        public int is_deleted { get; set; }
     }
 }
